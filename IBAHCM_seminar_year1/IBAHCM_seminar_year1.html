@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Modelling COVID-19 incidence in Low-Middle Income Countries and moving back to biodiversity &amp; landscapes</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Yacob Haddou" />
+    <meta name="date" content="2021-10-01" />
+    <script src="IBAHCM_seminar_year1_files/header-attrs/header-attrs.js"></script>
+    <link href="IBAHCM_seminar_year1_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="IBAHCM_seminar_year1_files/tile-view/tile-view.js"></script>
+    <script src="IBAHCM_seminar_year1_files/fabric/fabric.min.js"></script>
+    <link href="IBAHCM_seminar_year1_files/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="IBAHCM_seminar_year1_files/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="IBAHCM_seminar_year1_files/xaringanExtra-progressBar/progress-bar.js"></script>
+    <link href="IBAHCM_seminar_year1_files/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="IBAHCM_seminar_year1_files/font-awesome/css/v4-shims.min.css" rel="stylesheet" />
+    <script src="IBAHCM_seminar_year1_files/htmlwidgets/htmlwidgets.js"></script>
+    <script src="IBAHCM_seminar_year1_files/jquery/jquery.min.js"></script>
+    <link href="IBAHCM_seminar_year1_files/leaflet/leaflet.css" rel="stylesheet" />
+    <script src="IBAHCM_seminar_year1_files/leaflet/leaflet.js"></script>
+    <link href="IBAHCM_seminar_year1_files/leafletfix/leafletfix.css" rel="stylesheet" />
+    <script src="IBAHCM_seminar_year1_files/proj4/proj4.min.js"></script>
+    <script src="IBAHCM_seminar_year1_files/Proj4Leaflet/proj4leaflet.js"></script>
+    <link href="IBAHCM_seminar_year1_files/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="IBAHCM_seminar_year1_files/leaflet-binding/leaflet.js"></script>
+    <script src="IBAHCM_seminar_year1_files/leaflet-providers/leaflet-providers_1.9.0.js"></script>
+    <script src="IBAHCM_seminar_year1_files/leaflet-providers-plugin/leaflet-providers-plugin.js"></script>
+    <script src="IBAHCM_seminar_year1_files/FlatGeoBuf/fgb.js"></script>
+    <script src="IBAHCM_seminar_year1_files/FlatGeoBuf/flatgeobuf-geojson.min.js"></script>
+    <script src="IBAHCM_seminar_year1_files/chromajs/chroma.min.js"></script>
+    <link id="dhaka_wards-cases-1-attachment" rel="attachment" href="IBAHCM_seminar_year1_files/dhaka_wards-cases/dhaka_wards-cases_layer.fgb"/>
+    <link href="IBAHCM_seminar_year1_files/HomeButton/home-button.css" rel="stylesheet" />
+    <script src="IBAHCM_seminar_year1_files/HomeButton/home-button.js"></script>
+    <script src="IBAHCM_seminar_year1_files/HomeButton/easy-button-src.min.js"></script>
+    <script src="IBAHCM_seminar_year1_files/clipboard/setClipboardText.js"></script>
+    <link href="IBAHCM_seminar_year1_files/mapviewCSS/mapview-popup.css" rel="stylesheet" />
+    <link href="IBAHCM_seminar_year1_files/mapviewCSS/mapview.css" rel="stylesheet" />
+    <link id="dhaka_muni-cases-1-attachment" rel="attachment" href="IBAHCM_seminar_year1_files/dhaka_muni-cases/dhaka_muni-cases_layer.fgb"/>
+    <link id="dhaka_wards-SIR-1-attachment" rel="attachment" href="IBAHCM_seminar_year1_files/dhaka_wards-SIR/dhaka_wards-SIR_layer.fgb"/>
+    <link id="dhaka_muni-SIR-1-attachment" rel="attachment" href="IBAHCM_seminar_year1_files/dhaka_muni-SIR/dhaka_muni-SIR_layer.fgb"/>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: left, title-slide
+
+# Modelling COVID-19 incidence in Low-Middle Income Countries and moving back to biodiversity &amp; landscapes
+## IBAHCM seminar
+### Yacob Haddou
+### 2021-10-01
+
+---
+
+
+
+
+
+
+
+
+<style>.xe__progress-bar__container {
+  bottom:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 0.25em;
+  background-color: #ff3355;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+
+.center[
+&lt;img src="profile_photo.jpg"
+alt=""
+width="300px"
+/&gt;
+
+[<i class="fa fa-paper-plane" role="presentation" aria-label="paper-plane icon"></i> yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)&lt;br&gt;
+[<i class="fab fa-github" role="presentation" aria-label="github icon"></i> @https://github.com/valiriel](https://github.com/valiriel)&lt;br/&gt;
+[<i class="fab fa-orcid" role="presentation" aria-label="orcid icon"></i> @https://orcid.org/0000-0003-0557-0339](https://orcid.org/0000-0003-0557-0339)&lt;br/&gt;
+[<i class="fab fa-researchgate" role="presentation" aria-label="researchgate icon"></i> @https://www.researchgate.net/profile/Yacob-Haddou](https://www.researchgate.net/profile/Yacob-Haddou)&lt;br/&gt;
+]
+
+---
+
+# How did I get here?
+
+.large[
+- **2015 - See you later Italy**
+]
+
+---
+
+# How did I get here?
+
+.large[
+- 2015 - See you later Italy
+
+- **2015 to 2018 - B.Sc. International Wildlife Biology @ USW**
+]
+
+---
+
+# How did I get here?
+
+.large[
+- 2015 - See you later Italy
+
+- 2015 to 2018 - B.Sc. International Wildlife Biology @ USW
+
+- **2018 to 2019 - M.Sc. QMBCE @ University of Glasgow**
+]
+
+---
+
+# How did I get here?
+
+.large[
+- 2015 - See you later Italy
+
+- 2015 to 2018 - B.Sc. International Wildlife Biology @ USW
+
+- 2018 to 2019 - M.Sc. QMBCE @ University of Glasgow
+
+- **2019 to 2020 - Looking for PhD funding :(**
+]
+
+---
+
+# How did I get here?
+
+.large[
+- 2015 - See you later Italy
+
+- 2015 to 2018 - B.Sc. International Wildlife Biology @ USW
+
+- 2018 to 2019 - M.Sc. QMBCE @ University of Glasgow
+
+- 2019 to 2020 - Looking for PhD funding :(
+  - **2019 to present - Graduate Teaching Assistant @ UoG Glasgow**
+  - **2019 to 2020 - Research work in IBAHCM**
+]
+
+---
+
+# How did I get here?
+
+.large[
+- 2015 - See you later Italy
+
+- 2015 to 2018 - B.Sc. International Wildlife Biology @ USW
+
+- 2018 to 2019 - M.Sc. QMBCE @ University of Glasgow
+
+- 2019 to 2020 - Looking for PhD funding :(
+  - 2019 to present - Graduate Teaching Assistant @ UoG Glasgow
+  - 2019 to 2020 - Research work in IBAHCM
+
+- **2020 to present - PhD via MVLS DTP Scholarship funding**
+
+]
+
+---
+
+# How did I get here?
+
+.large[
+
+- 2018 to 2019 - M.Sc. QMBCE @ University of Glasgow
+
+- 2019 to 2020 - Looking for PhD funding :(
+
+- 2020 to present - PhD via MVLS DTP Scholarship funding
+  - **Oct 2020 to Sept 2021 - project rotations**
+  - **leave/extension to work on COVID-19 response for some months**
+  - **Sept 2021 - start of main project**
+]
+
+---
+
+# Some academic keywords about me
+
+Biodiversity response to landscape changes
+
+Extinction debts and colonization credits
+
+R programming
+
+Statistics + JAGS/STAN/INLA
+
+Spatio-temporal analyses
+
+GIS and r-spatial 
+
+---
+
+# Slides structure
+
+.large[
+1. Modelling COVID-19 incidence in Dhaka, Bangladesh
+
+2. Intro to my PhD project
+]
+
+---
+
+## Modelling COVID-19 incidence in Dhaka, Bangladesh
+
+&lt;font size="5"&gt;University of Glasgow COVID-19 LMIC modelling response team
+
+.pull-left[
+- &lt;font size="5"&gt;Fergus J Chadwick @ UoG, IBAHCM&lt;/font&gt;
+
+- &lt;font size="5"&gt;Yacob Haddou @ UoG, IBAHCM&lt;/font&gt;
+
+- &lt;font size="5"&gt;Jess Clark @ UoG, IBAHCM&lt;/font&gt;
+
+- &lt;font size="5"&gt;Jess Enright @ UoG, SCS&lt;/font&gt;
+
+- &lt;font size="5"&gt;Elaine Ferguson @ UoG, IBAHCM&lt;/font&gt;
+
+- &lt;font size="5"&gt;Katie Hampson @ UoG, IBAHCM&lt;/font&gt;
+
+- &lt;font size="5"&gt;Davina Hill @ UoG, IBAHCM&lt;/font&gt;
+]
+
+.pull-right[
+
+- &lt;font size="5"&gt;Jason Matthiopoulos @ UoG, IBAHCM&lt;/font&gt; 
+
+- &lt;font size="5"&gt;Janine Illian @ UoG, SMS&lt;/font&gt;
+
+- &lt;font size="5"&gt;Mikolaj E Kundegorski @ UoG, IBAHCM&lt;/font&gt;
+
+- &lt;font size="5"&gt;Luca Nelli @ UoG, IBAHCM&lt;/font&gt;
+
+- &lt;font size="5"&gt;Ben Swallow @ UoG, SMS&lt;/font&gt;
+
+- &lt;font size="5"&gt;Craig Wilkie @ UoG, SMS&lt;/font&gt;
+]
+
+------------
+
+.center[
+https://github.com/boydorr/BGD_Covid-19
+
+https://github.com/valiriel/DHAKA_COVID19_INLA
+]
+
+---
+
+## Modelling COVID-19 incidence in Dhaka, Bangladesh
+
+# Why?
+
+- Analyze the spatio-temporal trends of COVID-19 within one of the most densely populated megacities in the world
+
+- Identify hotspots areas and worrying trends to inform the Bangladesh Institute of Epidemiology
+
+- Feel useful during lockdown and provide statistical and data analysis help for on-the-ground interventions
+
+- To learn Integrated Nested Laplace Approximation (INLA) modelling
+
+---
+
+## COVID-19 incidence across Dhaka
+
+<div id="htmlwidget-f0b041c698796d2cc34a" style="width:100%;height:504px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f0b041c698796d2cc34a">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"createMapPane","args":["polygon",420]},{"method":"addFlatGeoBuf","args":["dhaka_wards-cases","dhaka.wards - cases",null,true,"ID",{"radius":6,"stroke":true,"color":"#333333","weight":0.5,"opacity":0.9,"fill":true,"fillColor":null,"fillOpacity":0.8},{"className":"","pane":"polygon"},"mapview-popup",{"radius":{"to":[3,15],"from":[3,15]},"weight":{"to":[1,10],"from":[1,10]},"opacity":{"to":[0,1],"from":[0,1]},"fillOpacity":{"to":[0,1],"from":[0,1]}}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[90.329448790495,23.6677940698386,90.512252265995,23.9008464640912,true,"dhaka.wards - cases","Zoom to dhaka.wards - cases","<strong> dhaka.wards - cases <\/strong>","bottomright"]},{"method":"addLegend","args":[{"colors":["#4B0055 , #432B70 10.9381850065761%, #1A4E86 21.8982902235861%, #006E94 32.8583954405962%, #008C98 43.8185006576063%, #00A791 54.7786058746164%, #00BD7E 65.7387110916265%, #63CF62 76.6988163086366%, #B3DC3C 87.6589215256466%, #F6E330 98.6190267426567%, #FDE333 "],"labels":["500","1,000","1,500","2,000","2,500","3,000","3,500","4,000","4,500"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"dhaka.wards - cases","extra":{"p_1":0.109381850065761,"p_n":0.986190267426567},"layerId":null,"className":"info legend","group":"dhaka.wards - cases"}]},{"method":"addFlatGeoBuf","args":["dhaka_muni-cases","dhaka.muni - cases",null,true,"ID",{"radius":6,"stroke":true,"color":"#333333","weight":0.5,"opacity":0.9,"fill":true,"fillColor":null,"fillOpacity":0.8},{"className":"","pane":"polygon"},"mapview-popup",{"radius":{"to":[3,15],"from":[3,15]},"weight":{"to":[1,10],"from":[1,10]},"opacity":{"to":[0,1],"from":[0,1]},"fillOpacity":{"to":[0,1],"from":[0,1]}}]},{"method":"addHomeButton","args":[90.329448790495,23.6677940698386,90.512252265995,23.9008464640912,true,"dhaka.muni - cases","Zoom to dhaka.muni - cases","<strong> dhaka.muni - cases <\/strong>","bottomright"]},{"method":"addLayersControl","args":["CartoDB.Positron",["dhaka.wards - cases","dhaka.muni - cases"],{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addLegend","args":[{"colors":["#4B0055 , #373C7B 16.146586174645%, #006F94 33.1519428620015%, #009B95 50.1572995493581%, #0ABF7C 67.1626562367146%, #9CD948 84.1680129240711%, #FDE333 "],"labels":["2,000","4,000","6,000","8,000","10,000"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"dhaka.muni - cases","extra":{"p_1":0.16146586174645,"p_n":0.841680129240711},"layerId":null,"className":"info legend","group":"dhaka.muni - cases"}]},{"method":"addHomeButton","args":[90.329448790495,23.6677940698386,90.512252265995,23.9008464640912,true,null,"Zoom to full extent","<strong>Zoom full<\/strong>","bottomleft"]}],"fitBounds":[23.6677940698386,90.329448790495,23.9008464640912,90.512252265995,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n      'z-index': '700',\n      });\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+
+---
+
+## COVID-19 SIR across Dhaka 
+Standardized Incidence Ratio (SIR) = observed cases / expected
+
+<div id="htmlwidget-3b8b73da37b61ad4d97d" style="width:100%;height:360px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3b8b73da37b61ad4d97d">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"createMapPane","args":["polygon",420]},{"method":"addFlatGeoBuf","args":["dhaka_wards-SIR","dhaka.wards - SIR",null,true,"ID",{"radius":6,"stroke":true,"color":"#333333","weight":0.5,"opacity":0.9,"fill":true,"fillColor":null,"fillOpacity":0.8},{"className":"","pane":"polygon"},"mapview-popup",{"radius":{"to":[3,15],"from":[3,15]},"weight":{"to":[1,10],"from":[1,10]},"opacity":{"to":[0,1],"from":[0,1]},"fillOpacity":{"to":[0,1],"from":[0,1]}}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[90.329448790495,23.6677940698386,90.512252265995,23.9008464640912,true,"dhaka.wards - SIR","Zoom to dhaka.wards - SIR","<strong> dhaka.wards - SIR <\/strong>","bottomright"]},{"method":"addLegend","args":[{"colors":["#00204D , #1E3D6C 16.8960931649556%, #585D6D 33.8048896669639%, #7E7D76 50.7136861689722%, #A89F73 67.6224826709806%, #D7C461 84.5312791729889%, #FFEA46 "],"labels":["2","4","6","8","10"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"dhaka.wards - SIR","extra":{"p_1":0.168960931649556,"p_n":0.845312791729889},"layerId":null,"className":"info legend","group":"dhaka.wards - SIR"}]},{"method":"addFlatGeoBuf","args":["dhaka_muni-SIR","dhaka.muni - SIR",null,true,"ID",{"radius":6,"stroke":true,"color":"#333333","weight":0.5,"opacity":0.9,"fill":true,"fillColor":null,"fillOpacity":0.8},{"className":"","pane":"polygon"},"mapview-popup",{"radius":{"to":[3,15],"from":[3,15]},"weight":{"to":[1,10],"from":[1,10]},"opacity":{"to":[0,1],"from":[0,1]},"fillOpacity":{"to":[0,1],"from":[0,1]}}]},{"method":"addHomeButton","args":[90.329448790495,23.6677940698386,90.512252265995,23.9008464640912,true,"dhaka.muni - SIR","Zoom to dhaka.muni - SIR","<strong> dhaka.muni - SIR <\/strong>","bottomright"]},{"method":"addLayersControl","args":["CartoDB.Positron",["dhaka.wards - SIR","dhaka.muni - SIR"],{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addLegend","args":[{"colors":["#00204D , #273C65 16.2013995030948%, #535B6E 32.9417460709309%, #7C7A74 49.6820926387669%, #A59C73 66.4224392066029%, #D3C163 83.162785774439%, #FFEA46 99.903132342275%, #FFEA46 "],"labels":["1","2","3","4","5","6"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"numeric","title":"dhaka.muni - SIR","extra":{"p_1":0.162013995030948,"p_n":0.99903132342275},"layerId":null,"className":"info legend","group":"dhaka.muni - SIR"}]},{"method":"addHomeButton","args":[90.329448790495,23.6677940698386,90.512252265995,23.9008464640912,true,null,"Zoom to full extent","<strong>Zoom full<\/strong>","bottomleft"]}],"fitBounds":[23.6677940698386,90.329448790495,23.9008464640912,90.512252265995,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n      'z-index': '700',\n      });\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+
+---
+
+## COVID-19 temporal trends across Dhaka wards
+
+&lt;img src="IBAHCM_seminar_year1_files/figure-html/unnamed-chunk-3-1.png" width="100%" /&gt;
+
+---
+
+## Modelling COVID-19 incidence in Dhaka, Bangladesh
+
+# INLA
+
+A little to complex to explain in 5 minutes. 
+
+Imagine a linear model where you can define random effects, in INLA these random effects can be unstructured (your common glmer RE) or structured:
+
+- **structured temporal RE** based on models such as ar1, rw, ar2
+
+- **structured spatial RE** based for example on distance between polygons 
+
+- **spatiotemporal interactions** of the options above
+
+---
+
+# I can't really show results time and non-disclosure agreements for now
+
+---
+
+## Modelling COVID-19 incidence in Dhaka, Bangladesh
+
+# In the end it didn't even matter
+
+#### Take home messages
+
+- Sometime the data is not good enough for the model
+
+- Data collection needs to follow scientific protocols, especially during a pandemic
+
+- Testing capacity was not up to standards
+
+- I guess, at least I learned how to use INLA...
+
+---
+
+# Back to biodiversity and the main PhD
+
+- Started 2 weeks ago so much of is still unsure
+
+- I am currently focusing on shaping up a clear set of research questions
+
+- The overall topic will focus on returning to the analysis of biodiversity response to landscape changes
+
+---
+
+- Haddou Y., Mancy R., Matthiopoulos J., Spatharis S., Dominoni D. (2020) Invisible biodiversity: extinction debts and colonization credits amongst US birds. Nature Ecology and Evolution. [**in review**] [https://doi.org/10.21203/rs.3.rs-134174/v1] 
+
+- Temporal lags in the response of biodiversity to changes in landscape composition
+  - Compare taxa responses
+  - Frequency of landscape changes and their speed
+  - Incorporate more landscape components heterogeneity, climatic
+  - Analyze differences across spatial and temporal, size at which these process manifest
+  - Explore sensitivity of biodiversity metrics, functional diversity and niche occupancy
+
+- Explore ecosystems engineering and biodiversity optimization.
+  -Rearranging spatial features to achieve a target biodiversity.
+
+---
+
+## PhD supervisors
+
+Davide Dominoni
+
+Rebecca Mancy
+
+Jason Matthioupoulos
+
+Sofie Spatharis
+
+## Funders
+College of Medicine, Veterinary and Life Sciences @ University of Glasgow
+
+---
+
+## Thank you for the attention.
+
+### Any questions ?
+
+[<i class="fa fa-paper-plane" role="presentation" aria-label="paper-plane icon"></i> yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)&lt;br&gt;
+[<i class="fab fa-github" role="presentation" aria-label="github icon"></i> @https://github.com/valiriel](https://github.com/valiriel)&lt;br/&gt;
+[<i class="fab fa-orcid" role="presentation" aria-label="orcid icon"></i> @https://orcid.org/0000-0003-0557-0339](https://orcid.org/0000-0003-0557-0339)&lt;br/&gt;
+[<i class="fab fa-researchgate" role="presentation" aria-label="researchgate icon"></i> @https://www.researchgate.net/profile/Yacob-Haddou](https://www.researchgate.net/profile/Yacob-Haddou)&lt;br/&gt;
+
+slides powered by xaringan https://github.com/yihui/xaringan
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%/%total%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
