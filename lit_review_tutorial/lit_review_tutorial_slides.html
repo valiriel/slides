@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>lit_review_tutorial_slides.knit</title>
+    <meta charset="utf-8" />
+    <script src="lit_review_tutorial_slides_files/header-attrs/header-attrs.js"></script>
+    <link href="lit_review_tutorial_slides_files/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="lit_review_tutorial_slides_files/font-awesome/css/v4-shims.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+
+
+
+
+.right[
+# Reproducible Evidence Synthesis
+## How to lit review  
+]
+
+----
+
+.left[
+
+##### [<i class="fa fa-paper-plane" role="presentation" aria-label="paper-plane icon"></i> ___ yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)&lt;br&gt;
+##### [<i class="fab fa-github" role="presentation" aria-label="github icon"></i> ___ https://github.com/valiriel](https://github.com/valiriel)&lt;br/&gt;
+##### [<i class="fab fa-orcid" role="presentation" aria-label="orcid icon"></i> ___ https://orcid.org/0000-0003-0557-0339](https://orcid.org/0000-0003-0557-0339)&lt;br/&gt;
+##### [<i class="fab fa-researchgate" role="presentation" aria-label="researchgate icon"></i> ___ https://www.researchgate.net/profile/Yacob-Haddou](https://www.researchgate.net/profile/Yacob-Haddou)&lt;br/&gt;
+
+]
+
+---
+
+## Disclaimer &amp; context
+--------------
+
+- I have not invented this, just reshaped it to fit my needs
+
+- This is part of my PhD initial review, &lt;b&gt; first time &lt;/b&gt; I do an "official" review
+
+##### _ Zhi Foo et al. _  (2021) A practical guide to question formation, systematic searching and study screening for literature reviews in ecology and evolution. Methods Ecol. Evol. DOI: 10.1111/2041-210X.13654
+
+##### _ Grames et al. _  (2019) An automated approach to identifying search terms for systematic reviews using keyword co‐occurrence networks. Methods Ecol. Evol. DOI: 10.1111/2041-210X.13268
+
+---
+
+## Start somewhere...
+------------------------
+
+- Come up with your unambiguous research question, clearly defined.
+
+- Get an idea of the _ high citation _ articles on your topic.
+
+- &lt;b&gt; Seek out any review already done on your field ! &lt;/b&gt; 
+
+- Avoid overlaps with what has already been synthesized before by clarifying the timeframe, aim and search string of past reviews. 
+
+- Now come up with a naive search question.
+
+---
+
+## Naive search question
+-------------------------
+
+1. Come up with a series of keywords that represent your question.
+
+  - PICO method (Population, Intervention, Control, Outcome)
+  - Think of it as Study system, Predictor variables and Response
+  - Consider lateral/synonyms and vertical/specific/overarching terms
+  - Check with peers that it all makes sense
+
+2. Use boolean operator &lt;b&gt;(AND, OR, ...)&lt;/b&gt; to put the terms together 
+
+3. Use truncation/stemming &lt;b&gt;(*)&lt;/b&gt; to capture word with common root and plurals, be cautious though
+
+---
+
+## Example naive search question
+--------------------------------
+
+After having a look at past publications/reviews and what said above I came up with this series of term.
+
+Not interested in a specific response or explanatory so kept it wide for anything including these terms.
+
+.inverse[ 
+
+##### ("extinction debt/" OR "species credit/" OR "colonization credit/" OR "colonisation credit/" OR "immigration credit/" OR "ecosystem function debt/" OR "ecosystem service debt/" OR "ecosystem function credit/" OR "ecosystem service credit/" OR "ecological lags" OR "biodiversity lag/" OR "species lags" OR "landscape legacy") 
+
+]
+
+substitute / with * (markdown does not interpret otherwise)
+
+---
+
+## Time to do a search
+----------------------
+
+- Pick some literature databases and query them.
+  - Web of Science, BASE, SCOPUS, ScienceDirect etc...
+
+- &lt;b&gt;Do&lt;/b&gt; have a look at how many entries are returned, in the many 1000s you are probably asking something too broad and no one has time to go through all of that, honestly. 
+
+- Export the entries as .ris files
+
+---
+
+## Install some packages
+------------------------
+
+### https://rmetaverse.github.io/
+
+
+```r
+remotes::install_github("rmetaverse/metaverse")
+remotes::install_github("elizagrames/litsearchr",
+                        ref="main")
+```
+
+Packages aimed at evidence syntheses and meta-analyses
+
+---
+
+## Import naive search results
+--------------------------    
+
+
+```r
+naive_import &lt;- import_results(directory = "lit_data/00_naive_lit_data/naive_search_data", verbose = TRUE)
+print(paste0("imported n. ", nrow(naive_import)))
+```
+910 records from my naive search  
+
+---
+
+## De-duplicate
+-------------------------- 
+
+Based on exact match and string similarity of title
+
+
+```r
+naive_deduplicated &lt;- remove_duplicates(naive_import, 
+                                        field = "title", method = "exact")
+print(paste0("deduplicated_exact n. ", nrow(naive_deduplicated)))
+
+naive_deduplicated &lt;- remove_duplicates(naive_deduplicated, 
+                                        field = "title", method = "string_osa")
+print(paste0("deduplicated_string n. ", nrow(naive_deduplicated)))
+```
+
+810 and then 799 remaining, 111 records gone
+
+---
+
+## Extract keywords 
+-------------------------- 
+
+
+```r
+rake_keywords &lt;- 
+  extract_terms(text = paste(naive_deduplicated$title, naive_deduplicated$abstract, 
+                             naive_deduplicated$keywords),
+                method = "fakerake", 
+                min_freq = 10, # at least 10 times 
+                ngrams = TRUE, min_n = 2, # minimum 2 words keywords
+                language = "English", 
+                stopwords = get_stopwords("English")) %&gt;% as_tibble()
+
+# remove terms that are too broad, save to csv (ver1) 
+# and then save for re-import (ver2)
+write.csv(rake_keywords, file = "lit_data/00_naive_lit_data/naive_search_keywords_ver1.csv")
+```
+
+---
+
+### Remove broad keywords and co-occurence network 
+--------------------------
+
+
+```r
+#' obsolete or too broad terms manually removed, such as keywords related to specific 
+#' habitat or taxonomic groups, broad words ("biodiversity", population size) and unrelated connecting words
+rake_keywords &lt;- read.csv("lit_data/00_naive_lit_data/naive_search_keywords_ver2.csv")[,-1]
+
+#' create document-feature matrix
+naive_dfm &lt;- create_dfm(elements = paste(naive_deduplicated$title, 
+                                         naive_deduplicated$abstract),
+                        features = rake_keywords)
+
+#' create a keyword co-occurrence network
+naive_graph &lt;- create_network(search_dfm = naive_dfm, min_studies = 5, min_occ = 5)
+
+#' evaluate keyword importance and clean
+nodes_rank &lt;- strength(naive_graph)
+
+terms_rank &lt;- tibble(term=names(nodes_rank), strength=nodes_rank, row.names=NULL) %&gt;%
+                  mutate(rank=rank(strength, ties.method="min")) %&gt;% arrange(strength)
+```
+
+---
+
+## Enhance,enhance 
+--------------------------
+
+- Note that the final keyword order might not always be so useful, words such us biodiversity could be high ranking but not necessarily good.
+
+#### Manually inspect the list and see if you find any keywords that could fit in your original naive string, if yes include them and remember to truncate.
+
+---
+
+## Final search string
+--------------------------
+
+.center[.inverse[#### ("extinction debt/" OR "species credit/" OR "colonization credit/" OR "colonisation credit/" OR "immigration credit/" OR "ecosystem function debt/" OR "ecosystem service debt/" OR "ecosystem function credit/" OR "ecosystem service credit/" OR "ecological lags" OR "biodiversity lag/" OR "species lag/" OR "landscape legac/")
+.center[#+]
+###"community lag/" OR "emigration debt/" OR "delayed species extinction/" OR "species debt/" OR "delayed species colonisation/" OR "delayed species colonization/" 
+]]
+
+---
+
+## Loop one more time through the above steps
+--------------------------
+
+1. Search the lit databases with your final string
+  - 966 entries retrieved
+
+1. De-duplicate
+  - 830 articles remaining
+
+---
+
+## Manual screening  (part 1)
+--------------------------
+
+
+```r
+# save a copy of raw data, 830 articles
+write.csv(deduplicated, file="lit_data/02_title_abstract_screening/00_lit_not_screened.csv")
+
+# screen titles 
+revtools::screen_titles(deduplicated) 
+# manually move saved file from main dir to lit_data/02_title_abstract_screening as 01_lit_title_screened.csv
+data &lt;- read.csv("lit_data/02_title_abstract_screening/01_lit_title_screened.csv") 
+
+# retain selection from above, remove excluded
+data &lt;- data %&gt;% filter(screened_titles != "excluded") 
+table(data$screened_titles); table(data$source_type); table(data$year)
+
+# screen abstract
+screen_abstracts(data %&gt;% as.bibliography()) # manually open file above
+# manually move saved file from main dir to lit_data/02_title_abstract_screening as 02_lit_abstract_screened.csv
+```
+
+---
+
+## Manual screening (part 2)
+--------------------------
+
+
+```r
+# import again
+data2 &lt;- read.csv("lit_data/02_title_abstract_screening/02_lit_abstract_screened.csv")
+
+# retain selection from above, remove excluded
+data2 &lt;- data2 %&gt;% filter(screened_abstracts != "excluded") 
+table(data2$screened_abstracts); table(data2$source_type); table(data2$year)
+
+# retain peer-reviewed articles
+data2 &lt;- data2 %&gt;% filter(source_type == "JOUR")
+
+# see trend through time
+plot(names(table(data2$year)), as.numeric(table(data2$year)), type="l")
+
+#' Go through each article and import into reference manager for reading
+write.csv(data2, file="lit_data/02_title_abstract_screening/03_final_lit_screened.csv")
+```
+
+---
+
+## Manual screening (part 3)
+--------------------------
+
+Some reference numbers:
+- 830 to begin with
+- 289 left after screening titles
+- 208 left after screening abstracts
+- 196 left after keeping only peer-reviewed material
+- 190 after sourcing and final clean-up
+
+---
+
+## Make it reproducible and more
+--------------------------
+
+.middle[
+.center[
+####Show R code, GitHub, Zotero
+]
+]
+
+---
+
+## Reading time
+--------------------------
+
+Constructed a series of variables and criteria to quantitatively assess each article and then report
+
+.center[
+### Show csv
+]
+
+---
+
+.left[
+
+##### [<i class="fa fa-paper-plane" role="presentation" aria-label="paper-plane icon"></i> ___ yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)&lt;br&gt;
+##### [<i class="fab fa-github" role="presentation" aria-label="github icon"></i> ___ https://github.com/valiriel](https://github.com/valiriel)&lt;br/&gt;
+##### [<i class="fab fa-orcid" role="presentation" aria-label="orcid icon"></i> ___ https://orcid.org/0000-0003-0557-0339](https://orcid.org/0000-0003-0557-0339)&lt;br/&gt;
+##### [<i class="fab fa-researchgate" role="presentation" aria-label="researchgate icon"></i> ___ https://www.researchgate.net/profile/Yacob-Haddou](https://www.researchgate.net/profile/Yacob-Haddou)&lt;br/&gt;
+
+### slides powered by xaringan https://github.com/yihui/xaringan
+
+]
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%/%total%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
