@@ -42,7 +42,7 @@ xaringanExtra::use_scribble()
 ```
 
 ```{r xaringanExtra, echo = FALSE}
-xaringanExtra::use_progress_bar(color = "#264653", location = "bottom")
+xaringanExtra::use_progress_bar(color = "#ffffff", location = "bottom")
 ```
 
 ```{r xaringan-themer, include=FALSE, warning=FALSE}
@@ -66,10 +66,13 @@ style_duo_accent(
 
 .left[
 
-##### [`r fa_i("paper-plane")` ___ yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)<br>
-##### [`r fa_i("github")` ___ https://github.com/valiriel](https://github.com/valiriel)<br/>
-##### [`r fa_i("orcid")` ___ https://orcid.org/0000-0003-0557-0339](https://orcid.org/0000-0003-0557-0339)<br/>
-##### [`r fa_i("researchgate")` ___ https://www.researchgate.net/profile/Yacob-Haddou](https://www.researchgate.net/profile/Yacob-Haddou)<br/>
+>##### [`r fa_i("envelope")` yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)<br>
+
+>##### [`r fa_i("user-ninja")` https://valiriel.github.io](mailto:yacob.haddou@glasgow.ac.uk)<br>
+
+>##### [`r fa_i("github")` `r fa_i("researchgate")` .../valiriel](https://github.com/valiriel)
+
+>##### [`r fa_i("orcid")` https://orcid.org/0000-0003-0557-0339](https://orcid.org/0000-0003-0557-0339)
 
 ]
 

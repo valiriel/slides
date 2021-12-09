@@ -31,10 +31,13 @@
 
 .left[
 
-##### [<i class="fa fa-paper-plane" role="presentation" aria-label="paper-plane icon"></i> ___ yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)&lt;br&gt;
-##### [<i class="fab fa-github" role="presentation" aria-label="github icon"></i> ___ https://github.com/valiriel](https://github.com/valiriel)&lt;br/&gt;
-##### [<i class="fab fa-orcid" role="presentation" aria-label="orcid icon"></i> ___ https://orcid.org/0000-0003-0557-0339](https://orcid.org/0000-0003-0557-0339)&lt;br/&gt;
-##### [<i class="fab fa-researchgate" role="presentation" aria-label="researchgate icon"></i> ___ https://www.researchgate.net/profile/Yacob-Haddou](https://www.researchgate.net/profile/Yacob-Haddou)&lt;br/&gt;
+&gt;##### [<i class="fa fa-envelope" role="presentation" aria-label="envelope icon"></i> yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)&lt;br&gt;
+
+&gt;##### [<i class="fa fa-user-ninja" role="presentation" aria-label="user-ninja icon"></i> https://valiriel.github.io](mailto:yacob.haddou@glasgow.ac.uk)&lt;br&gt;
+
+&gt;##### [<i class="fab fa-github" role="presentation" aria-label="github icon"></i> <i class="fab fa-researchgate" role="presentation" aria-label="researchgate icon"></i> .../valiriel](https://github.com/valiriel)
+
+&gt;##### [<i class="fab fa-orcid" role="presentation" aria-label="orcid icon"></i> https://orcid.org/0000-0003-0557-0339](https://orcid.org/0000-0003-0557-0339)
 
 ]
 
@@ -121,8 +124,7 @@ substitute / with * (markdown does not interpret otherwise)
 
 ```r
 remotes::install_github("rmetaverse/metaverse")
-remotes::install_github("elizagrames/litsearchr",
-                        ref="main")
+remotes::install_github("elizagrames/litsearchr", ref = "main")
 ```
 
 Packages aimed at evidence syntheses and meta-analyses
@@ -134,7 +136,8 @@ Packages aimed at evidence syntheses and meta-analyses
 
 
 ```r
-naive_import &lt;- import_results(directory = "lit_data/00_naive_lit_data/naive_search_data", verbose = TRUE)
+naive_import &lt;- import_results(directory = "lit_data/00_naive_lit_data/naive_search_data",
+    verbose = TRUE)
 print(paste0("imported n. ", nrow(naive_import)))
 ```
 910 records from my naive search  
@@ -148,12 +151,10 @@ Based on exact match and string similarity of title
 
 
 ```r
-naive_deduplicated &lt;- remove_duplicates(naive_import, 
-                                        field = "title", method = "exact")
+naive_deduplicated &lt;- remove_duplicates(naive_import, field = "title", method = "exact")
 print(paste0("deduplicated_exact n. ", nrow(naive_deduplicated)))
 
-naive_deduplicated &lt;- remove_duplicates(naive_deduplicated, 
-                                        field = "title", method = "string_osa")
+naive_deduplicated &lt;- remove_duplicates(naive_deduplicated, field = "title", method = "string_osa")
 print(paste0("deduplicated_string n. ", nrow(naive_deduplicated)))
 ```
 
@@ -188,13 +189,13 @@ write.csv(rake_keywords, file = "lit_data/00_naive_lit_data/naive_search_keyword
 
 ```r
 #' obsolete or too broad terms manually removed, such as keywords related to specific 
-#' habitat or taxonomic groups, broad words ("biodiversity", population size) and unrelated connecting words
-rake_keywords &lt;- read.csv("lit_data/00_naive_lit_data/naive_search_keywords_ver2.csv")[,-1]
+#' habitat or taxonomic groups, broad words ('biodiversity', population size) and unrelated connecting words
+rake_keywords &lt;- read.csv("lit_data/00_naive_lit_data/naive_search_keywords_ver2.csv")[,
+    -1]
 
 #' create document-feature matrix
-naive_dfm &lt;- create_dfm(elements = paste(naive_deduplicated$title, 
-                                         naive_deduplicated$abstract),
-                        features = rake_keywords)
+naive_dfm &lt;- create_dfm(elements = paste(naive_deduplicated$title, naive_deduplicated$abstract),
+    features = rake_keywords)
 
 #' create a keyword co-occurrence network
 naive_graph &lt;- create_network(search_dfm = naive_dfm, min_studies = 5, min_occ = 5)
@@ -202,8 +203,9 @@ naive_graph &lt;- create_network(search_dfm = naive_dfm, min_studies = 5, min_oc
 #' evaluate keyword importance and clean
 nodes_rank &lt;- strength(naive_graph)
 
-terms_rank &lt;- tibble(term=names(nodes_rank), strength=nodes_rank, row.names=NULL) %&gt;%
-                  mutate(rank=rank(strength, ties.method="min")) %&gt;% arrange(strength)
+terms_rank &lt;- tibble(term = names(nodes_rank), strength = nodes_rank, row.names = NULL) %&gt;%
+    mutate(rank = rank(strength, ties.method = "min")) %&gt;%
+    arrange(strength)
 ```
 
 ---
@@ -244,20 +246,26 @@ terms_rank &lt;- tibble(term=names(nodes_rank), strength=nodes_rank, row.names=N
 
 ```r
 # save a copy of raw data, 830 articles
-write.csv(deduplicated, file="lit_data/02_title_abstract_screening/00_lit_not_screened.csv")
+write.csv(deduplicated, file = "lit_data/02_title_abstract_screening/00_lit_not_screened.csv")
 
-# screen titles 
-revtools::screen_titles(deduplicated) 
-# manually move saved file from main dir to lit_data/02_title_abstract_screening as 01_lit_title_screened.csv
-data &lt;- read.csv("lit_data/02_title_abstract_screening/01_lit_title_screened.csv") 
+# screen titles
+revtools::screen_titles(deduplicated)
+# manually move saved file from main dir to
+# lit_data/02_title_abstract_screening as 01_lit_title_screened.csv
+data &lt;- read.csv("lit_data/02_title_abstract_screening/01_lit_title_screened.csv")
 
 # retain selection from above, remove excluded
-data &lt;- data %&gt;% filter(screened_titles != "excluded") 
-table(data$screened_titles); table(data$source_type); table(data$year)
+data &lt;- data %&gt;%
+    filter(screened_titles != "excluded")
+table(data$screened_titles)
+table(data$source_type)
+table(data$year)
 
 # screen abstract
-screen_abstracts(data %&gt;% as.bibliography()) # manually open file above
-# manually move saved file from main dir to lit_data/02_title_abstract_screening as 02_lit_abstract_screened.csv
+screen_abstracts(data %&gt;%
+    as.bibliography())  # manually open file above
+# manually move saved file from main dir to
+# lit_data/02_title_abstract_screening as 02_lit_abstract_screened.csv
 ```
 
 ---
@@ -271,17 +279,21 @@ screen_abstracts(data %&gt;% as.bibliography()) # manually open file above
 data2 &lt;- read.csv("lit_data/02_title_abstract_screening/02_lit_abstract_screened.csv")
 
 # retain selection from above, remove excluded
-data2 &lt;- data2 %&gt;% filter(screened_abstracts != "excluded") 
-table(data2$screened_abstracts); table(data2$source_type); table(data2$year)
+data2 &lt;- data2 %&gt;%
+    filter(screened_abstracts != "excluded")
+table(data2$screened_abstracts)
+table(data2$source_type)
+table(data2$year)
 
 # retain peer-reviewed articles
-data2 &lt;- data2 %&gt;% filter(source_type == "JOUR")
+data2 &lt;- data2 %&gt;%
+    filter(source_type == "JOUR")
 
 # see trend through time
-plot(names(table(data2$year)), as.numeric(table(data2$year)), type="l")
+plot(names(table(data2$year)), as.numeric(table(data2$year)), type = "l")
 
 #' Go through each article and import into reference manager for reading
-write.csv(data2, file="lit_data/02_title_abstract_screening/03_final_lit_screened.csv")
+write.csv(data2, file = "lit_data/02_title_abstract_screening/03_final_lit_screened.csv")
 ```
 
 ---
