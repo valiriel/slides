@@ -18,18 +18,18 @@
  *  Version: 0.4.1
  *
  * ------------------------------------------------------- */
-@import url(https://fonts.googleapis.com/css?family=Quicksand+Medium&display=swap);
-@import url(https://fonts.googleapis.com/css?family=Quicksand+Medium&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Quicksand&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Quicksand&display=swap);
 @import url(https://fonts.googleapis.com/css?family=Fira+Pro&display=swap);
 
 
 :root {
   /* Fonts */
-  --text-font-family: 'Quicksand Medium';
+  --text-font-family: Quicksand;
   --text-font-is-google: 1;
   --text-font-family-fallback: -apple-system, BlinkMacSystemFont, avenir next, avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial;
   --text-font-base: sans-serif;
-  --header-font-family: 'Quicksand Medium';
+  --header-font-family: Quicksand;
   --header-font-is-google: 1;
   --header-font-family-fallback: Georgia, serif;
   --code-font-family: 'Fira Pro';
@@ -44,7 +44,7 @@
 
   /* Colors */
   --text-color: #fffff0;
-  --header-color: #5f9ea0;
+  --header-color: #f5deb3;
   --background-color: #000000;
   --link-color: #f5deb3;
   --text-bold-color: #f5deb3;
@@ -53,11 +53,11 @@
   --inverse-background-color: #f5deb3;
   --inverse-header-color: #000000;
   --inverse-link-color: #f5deb3;
-  --title-slide-background-color: #5f9ea0;
+  --title-slide-background-color: #f5deb3;
   --title-slide-text-color: #000000;
-  --header-background-color: #5f9ea0;
+  --header-background-color: #f5deb3;
   --header-background-text-color: #000000;
-  --primary: #5f9ea0;
+  --primary: #f5deb3;
   --secondary: #f5deb3;
   --white: #FFFFFF;
   --black: #000000;
@@ -104,7 +104,7 @@ h1, h2, h3 {
   color: #f5deb3;
 }
 .remark-slide-number {
-  color: #5f9ea0;
+  color: #f5deb3;
   opacity: 1;
   font-size: 0.9rem;
 }
@@ -152,10 +152,10 @@ a, a > code {
   float: left;
 }
 .left-column h2, .left-column h3 {
-  color: #5f9ea099;
+  color: #f5deb399;
 }
 .left-column h2:last-of-type, .left-column h3:last-child {
-  color: #5f9ea0;
+  color: #f5deb3;
 }
 .right-column {
   width: 75%;

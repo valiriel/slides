@@ -1,0 +1,1 @@
+source("https://git.io/xaringan2pdf"); xaringan_to_pdf(input="bes_presentation_2021/bes_presentation_2021.html", output="bes_presentation_2021/bes_presentation_2021.pdf")
