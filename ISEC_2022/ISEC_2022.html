@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>ISEC_2022.knit</title>
+    <meta charset="utf-8" />
+    <script src="ISEC_2022_files/header-attrs/header-attrs.js"></script>
+    <link href="ISEC_2022_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="ISEC_2022_files/tile-view/tile-view.js"></script>
+    <script src="ISEC_2022_files/fabric/fabric.min.js"></script>
+    <link href="ISEC_2022_files/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="ISEC_2022_files/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="ISEC_2022_files/xaringanExtra-progressBar/progress-bar.js"></script>
+    <link href="ISEC_2022_files/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="ISEC_2022_files/font-awesome/css/v4-shims.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+<style>.xe__progress-bar__container {
+  bottom:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 0.25em;
+  background-color: #f5deb3;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+
+
+&lt;img src="figures/ISEC_introductory.png"
+alt=""
+width="1050px"
+/&gt;
+
+---
+
+&lt;!--- title slide ---&gt;
+
+&lt;br&gt;&lt;br/&gt;
+
+.right[
+##&lt;span style="color:#e71d36;font-size:120%"&gt;Extinction debts&lt;/span&gt; and &lt;span style="color:#1e90ff;font-size:120%"&gt;colonisation credits&lt;/span&gt; &lt;br&gt; in United States breeding bird communities
+]
+
+----
+&lt;b&gt;&lt;font size="5.5"&gt;Yacob Haddou, Jason Matthiopolous, Sofie Spatharis, Rebecca Mancy, Davide Dominoni &lt;/font&gt;&lt;/b&gt;
+
+---
+&lt;!--- ending slide ---&gt;
+
+
+&lt;font size="6"&gt; Haddou et al., &lt;font/&gt; &lt;font size="4.5"&gt; Widespread extinction debts and colonization
+credits in United States breeding bird communities &lt;font/&gt;&lt;font size="6"&gt; (2022) _Nature Ecology and Evolution_&lt;font/&gt;
+&lt;br&gt; 
+
+.left-column[
+
+&lt;img src="figures/paper_qr_code.png"
+alt=""
+width="300px"
+/&gt;
+&lt;img src="figures/uni_glasgow_logo.jpg"
+alt=""
+width="300px"
+/&gt;
+
+]
+
+.right-column[ 
+
+1&lt;sup&gt;st&lt;/sup&gt; year PhD student @ University of Glasgow
+#####[<i class="fa fa-envelope" role="presentation" aria-label="envelope icon"></i> yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)
+##### [<i class="fab fa-twitter" role="presentation" aria-label="twitter icon"></i> yacob_haddou](https://twitter.com/yacob_haddou)
+##### [<i class="fab fa-github" role="presentation" aria-label="github icon"></i> <i class="fab fa-researchgate" role="presentation" aria-label="researchgate icon"></i> .../valiriel](https://github.com/valiriel)
+&lt;font size="5"&gt; Slides coded with __Markdown &amp; xaringan__&lt;font/&gt;
+
+]  
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## Background
+------------------------
+
+Landscapes shape the communities inhabiting them.
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## Background
+------------------------
+
+Landscapes shape the communities inhabiting them.
+
+&gt; Biotic responses to land cover changes are rarely instantaneous &amp; rather subject to gradual extinctions and colonisations through time.
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## Background
+------------------------
+
+Landscapes shape the communities inhabiting them.
+
+&gt; Biotic responses to land cover changes are rarely instantaneous &amp; rather subject to gradual extinctions and colonisations through time.
+
+Estimates of biodiversity and population sizes depend on both:
+- __past__ history of complex legacies from gone landscapes
+- __present__ habitat composition 
+- __future__ of delayed debts and credits to be re-payed
+&lt;br&gt;&lt;br&gt;
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## &lt;span style="color:#e71d36;font-size:110%"&gt;Extinction debts&lt;/span&gt; and &lt;span style="color:#1e90ff;font-size:110%"&gt;Colonisation credits&lt;/span&gt;
+------------------------
+
+1. &lt;p&gt;Community at __equilibrium__ in a given landscape.
+&lt;br&gt;&lt;br&gt;
+
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## &lt;span style="color:#e71d36;font-size:110%"&gt;Extinction debts&lt;/span&gt; and &lt;span style="color:#1e90ff;font-size:110%"&gt;Colonisation credits&lt;/span&gt;
+------------------------
+
+1. &lt;p&gt;Community at __equilibrium__ in a given landscape.
+&lt;br&gt;&lt;br&gt;
+
+2. &lt;p&gt; A disturbance of the landscape takes place.
+&lt;br&gt;&lt;br&gt;
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## &lt;span style="color:#e71d36;font-size:110%"&gt;Extinction debts&lt;/span&gt; and &lt;span style="color:#1e90ff;font-size:110%"&gt;Colonisation credits&lt;/span&gt;
+------------------------
+
+1. &lt;p&gt;Community at __equilibrium__ in a given landscape.
+&lt;br&gt;&lt;br&gt;
+
+2. &lt;p&gt;A disturbance of the landscape takes place.
+&lt;br&gt;&lt;br&gt;
+
+3. &lt;p&gt;Now you have a __"new"__ landscape inhabited by an __"old"__ community.
+&lt;br&gt;&lt;br&gt;
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## &lt;span style="color:#e71d36;font-size:110%"&gt;Extinction debts&lt;/span&gt; and &lt;span style="color:#1e90ff;font-size:110%"&gt;Colonisation credits&lt;/span&gt;
+------------------------
+
+1. &lt;p&gt;Community at __equilibrium__ in a given landscape.
+&lt;br&gt;&lt;br&gt;
+
+2. &lt;p&gt;A disturbance of the landscape takes place.
+&lt;br&gt;&lt;br&gt;
+
+3. &lt;p&gt;Now you have a __"new"__ landscape inhabited by an __"old"__ community.
+&lt;br&gt;&lt;br&gt;
+
+4. The community response is lagged and will require time to equilibriate.
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## &lt;span style="color:#e71d36;font-size:110%"&gt;Extinction debts&lt;/span&gt; and &lt;span style="color:#1e90ff;font-size:110%"&gt;Colonisation credits&lt;/span&gt;
+------------------------
+
+These delayed responses will manifest either as an:
+&lt;br&gt;&lt;br&gt;
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## &lt;span style="color:#e71d36;font-size:110%"&gt;Extinction debts&lt;/span&gt; and &lt;span style="color:#1e90ff;font-size:110%"&gt;Colonisation credits&lt;/span&gt;
+------------------------
+
+These delayed responses will manifest either as an:
+&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;&lt;span style="color:crimson;font-size:170%"&gt;extinction debt&lt;/span&gt;&lt;/b&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp; new equilibrium &lt; current biodiversity
+&lt;br&gt;&lt;br/&gt;
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## &lt;span style="color:#e71d36;font-size:110%"&gt;Extinction debts&lt;/span&gt; and &lt;span style="color:#1e90ff;font-size:110%"&gt;Colonisation credits&lt;/span&gt;
+------------------------
+
+These delayed responses will manifest either as an:
+&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;&lt;span style="color:crimson;font-size:170%"&gt;extinction debt&lt;/span&gt;&lt;/b&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp; new equilibrium &lt; current biodiversity
+&lt;br&gt;
+
+or
+
+&lt;b&gt;&lt;span style="color:dodgerblue;font-size:170%"&gt;colonisation credit&lt;/span&gt;&lt;/b&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;  new equilibrium &gt; current biodiversity
+
+---
+
+&lt;!--- intro _ why care? ---&gt;
+
+## Why worry?
+------------------------
+
+- Ignoring &lt;b&gt;&lt;span style="color:crimson;font-size:150%"&gt; debts &lt;/span&gt;&lt;/b&gt; makes us over-optimistic of conservation as well as oblivious of extinctions that are already present but not yet manifested in the landscape.
+
+- Ignoring &lt;b&gt;&lt;span style="color:dodgerblue;font-size:150%"&gt; credits &lt;/span&gt;&lt;/b&gt; will lead to under-estimates of the current status and result in superfluous policies and efforts that could be better placed.
+
+---
+
+&lt;!--- intro _ research aims/hypothesis ---&gt;
+
+## Aims
+------------------------
+
+&gt; Quantify the contribution of past and present landscapes on current species diversity and predict &lt;span style="color:crimson;font-size:100%"&gt;extinction debts&lt;/span&gt; and  &lt;span style="color:#1e90ff;font-size:100%"&gt;colonisation credits&lt;/span&gt; at a continental scale.
+
+---
+
+&lt;!--- intro _ research aims/hypothesis ---&gt;
+
+## Aims
+------------------------
+
+&gt; Quantify the contribution of past and present landscapes on current species diversity and predict &lt;span style="color:crimson;font-size:100%"&gt;extinction debts&lt;/span&gt; and  &lt;span style="color:#1e90ff;font-size:100%"&gt;colonisation credits&lt;/span&gt; at a continental scale.
+
+&lt;br&gt;
+
+To do so we used:
+- __Effective number of species__ of 2880 US bird communities 
+- __Landscape __ over __15-years__ &amp; across the __whole contiguous USA__
+
+---
+&lt;!--- method _ methods base ---&gt;
+.pull-left[
+
+## __Biodiversity data__
+
+---------
+
+North America Breeding Bird Survey
+
+&lt;span style="font-size:90%"&gt; ~ 4000 routes, each ~ 40km long &lt;/span&gt;
+&lt;br&gt;&lt;br&gt;]
+
+.pull-right[
+&lt;br&gt;&lt;br&gt;
+&lt;img src="figures/method_1_routes.png"
+alt=""
+width="650px"
+height = "350px"   
+/&gt;
+]
+
+---
+&lt;!--- method _ methods base ---&gt;
+.pull-left[
+
+## __Biodiversity data__
+
+---------
+
+North America Breeding Bird Survey
+
+&lt;span style="font-size:90%"&gt; ~ 4000 routes, each ~ 40km long &lt;/span&gt;
+&lt;br&gt;&lt;br&gt;
+
+- &lt;span style="font-size:90%"&gt; 960 routes &amp; 2880 communities &lt;/span&gt; 
+
+- &lt;span style="font-size:90%"&gt; Species abundance over 3-years &amp; __Effective number of species__. &lt;/span&gt;
+&lt;/span&gt;
+
+]
+
+.pull-right[
+&lt;br&gt;&lt;br&gt;
+&lt;img src="figures/method_1_routes.png"
+alt=""
+width="650px"
+height = "350px"   
+/&gt;
+]
+
+---
+&lt;!--- method _ landscape data ---&gt;
+.pull-left[
+
+## __Landscape data__
+
+---------
+&lt;span style="font-size:90%"&gt;USGS National Land Cover Database&lt;/span&gt;
+
+&lt;span style="font-size:90%"&gt;Triennal raster data, 30m&lt;sup&gt;2&lt;/sup&gt; pixel.&lt;/span&gt;
+
+]
+
+.pull-right[.center[
+&lt;img src="figures/lc_maps.png"
+alt=""
+width="475px"
+height = "550px"   
+/&gt;
+]]
+
+---
+&lt;!--- method _ landscape data ---&gt;
+.pull-left[
+
+## __Landscape data__
+
+---------
+&lt;span style="font-size:90%"&gt;USGS National Land Cover Database&lt;/span&gt;
+
+&lt;span style="font-size:90%"&gt;Triennal raster data, 30m&lt;sup&gt;2&lt;/sup&gt; pixel.&lt;/span&gt;
+
+&lt;span style="font-size:90%"&gt;Aggregated to: &lt;b&gt;&lt;span style="color:#a3a3a3 ;"&gt;Urban&lt;/span&gt;&lt;/b&gt;, &lt;b&gt;&lt;span style="color:#3b7a57;"&gt;Forest&lt;/span&gt;&lt;/b&gt;, &lt;b&gt;&lt;span style="color:#32cd32;"&gt;Grassland&lt;/span&gt;&lt;/b&gt;, &lt;b&gt;&lt;span style="color:#e1ad21;"&gt;Cropland&lt;/span&gt;&lt;/b&gt;, &lt;b&gt;&lt;span style="color:#ba55d3;"&gt;Wetland&lt;/span&gt;&lt;/b&gt;&lt;/span&gt;
+
+&lt;span style="font-size:90%"&gt;Calculated for each land cover:
+- &lt;span style="font-size:90%"&gt; % of land cover in 2001 and 2016
+- &lt;span style="font-size:90%"&gt; % point change between timepoints&lt;/span&gt;
+]
+
+.pull-right[.center[
+&lt;img src="figures/lc_maps.png"
+alt=""
+width="475px"
+height = "550px"   
+/&gt;
+]]
+
+---
+&lt;!--- method _ methods base ---&gt;
+
+## Modelling
+------------------------
+
+`$$Diversity_{s,t}\sim\ Normal(µ_{s,t},σ)$$`
+
+`$$µ_{s,t} = \color{#ff70a6}{f(x_{s,t_2};β)}\color{#fca311}{ω(y_{s,t1,t2};γ)}+\color{#ff70a6}{f(x_{s,t_1};β)}\color{#fca311}{(1-ω(y_{s,t_1,t_2};γ))}+\color{#aaf683}{g(z_s;\alpha)}$$`
+&lt;br&gt;
+- &lt;b&gt;&lt;span style="color:#ff70a6;font-size:100%"&gt;equilibrium component&lt;/span&gt;&lt;/b&gt;
+
+- &lt;b&gt;&lt;span style="color:#fca311;font-size:100%"&gt;temporal legacy component&lt;/span&gt;&lt;/b&gt;
+
+- &lt;b&gt;&lt;span style="color:#aaf683;font-size:100%"&gt;static component&lt;/span&gt;&lt;/b&gt; (survey condition covariates)
+
+---
+&lt;!--- method _ equilibrium component ---&gt;
+
+## &lt;span style="color:#ff70a6"&gt;Equilibrium component&lt;/span&gt;
+------------------------
+
+&lt;br&gt;
+
+`$$µ_{s,t} = \color{#ff70a6}{f(x_{s,t_2};β)}ω(y_{s,t1,t2};γ)+\color{#ff70a6}{f(x_{s,t_1};β)}(1-ω(y_{s,t_1,t_2};γ))+g(z_s;\alpha)$$`
+&lt;br&gt;
+Linear and quadratic terms for each land cover + pairwise interactions.
+
+Parameters are estimated once and fixed between _t1_ and _t2_.
+
+It represents the diversity of a given landscape at equilibrium.
+
+---
+&lt;!--- method _ delay component ---&gt;
+
+## &lt;span style="color:#fca311"&gt;Temporal legacy component&lt;/span&gt;
+------------------------
+
+&lt;br&gt;
+
+`$$µ_{s,t} = f(x_{s,t_2};β)\color{#fca311}{ω(y_{s,t1,t2};γ)}+f(x_{s,t_1};β)\color{#fca311}{(1-ω(y_{s,t_1,t_2};γ))}+g(z_s;\alpha)$$`
+&lt;br&gt;
+&lt;!--- Land cover change _y_, at location _s_, per land cover _i_ and directionality _z_ between _t1_ and _t2_. ---&gt;
+
+It weights the proportional contribution of the two equilibria, as a function of __magnitude__, __directionality__ and __type__ of land cover change between _t1_ and _t2_.
+
+---
+&lt;!--- method _ static additive component ---&gt;
+
+## &lt;span style="color:#aaf683"&gt;Static component&lt;/span&gt;
+------------------------
+
+&lt;br&gt;
+
+`$$µ_{s,t} = f(x_{s,t_2};β)ω(y_{s,t1,t2};γ)+f(x_{s,t_1};β)(1-ω(y_{s,t_1,t_2};γ))+\color{#aaf683}{g(z_s;\alpha)}$$`
+&lt;br&gt;
+Linear and quadratic effect for temperature in 2016.
+
+Landscape heterogeneity, as effective number of land covers.
+
+Survey time of day &amp; observer level random effect.
+
+---
+
+&lt;!--- method _ recap of modelling base ---&gt;
+
+## Model fitting
+------------------------
+
+&lt;br&gt;
+
+`$$µ_{s,t} = \color{#ff70a6}{f(x_{s,t_2};β)}\color{#fca311}{ω(y_{s,t1,t2};γ)}+\color{#ff70a6}{f(x_{s,t_1};β)}\color{#fca311}{(1-ω(y_{s,t_1,t_2};γ))}+\color{#aaf683}{g(z_s;\alpha)}$$`
+&lt;br&gt;
+Fitted in Bayesian framework with STAN.
+
+Priors set with shrinkage properties. 
+
+WAIC-loo driven selection between buffer sizes.
+
+Uncertainty propagation via posterior sampling.
+
+---
+&lt;!--- result _ part1 _ text ---&gt;
+
+### Distribution of delays across landscapes of the USA
+------------------------
+
+Overall, 52% of the contiguous USA territory is expected to lose species and 48% to gain species.
+&lt;br&gt; &lt;br&gt;
+&gt; &lt;span style="color:crimson;font-size:110%"&gt;Extinction debts&lt;/span&gt; are concentrated around metropolitan regions.
+&gt; &lt;span style="color:dodgerblue;font-size:110%"&gt;Colonisation credit&lt;/span&gt; are localised in less inhabited areas.
+
+&lt;br&gt;
+
+- Biodiversity predictions in 2016 matched the observed data.
+
+- Debts and credits were also compared with more recent survey data.
+
+---
+background-color:#ffffff
+&lt;!--- result _ part1 _ USA_map ---&gt;
+&lt;!--- start by talking about delays are everywhere and then pinpoint urban areas (go through city names) and more remotes leadign to next slides ---&gt;
+.center[
+&lt;img src="figures/result_1.png"
+alt=""
+width="950px"
+height = "625px"   
+/&gt;
+]
+
+---
+&lt;!--- result _ part3 _ lc change maps ---&gt;
+
+### Land cover change effect on debts or credits
+------------------------
+
+Landscape modifications have not been homogeneous across the USA.
+
+&lt;br&gt;
+
+
+---
+
+background-color:#ffffff
+&lt;!--- result _ part3 _ glm_fit ---&gt;
+
+.pull-left[
+&lt;img src="figures/result_3.png"
+alt=""
+width="550px"
+height = "600px"   
+/&gt;
+]
+
+---
+
+background-color:#ffffff
+&lt;!--- result _ part3 _ glm_fit ---&gt;
+
+.pull-left[
+&lt;img src="figures/result_3.png"
+alt=""
+width="550px"
+height = "600px"   
+/&gt;
+]
+
+.pull-right[.center[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&lt;span style="color:black;"&gt;Debts and credits magnitude&lt;/span&gt;
+
+&lt;span style="color:black;"&gt; ~&lt;/span&gt;
+
+&lt;span style="color:black;"&gt; landscape change&lt;/span&gt;
+]]
+
+---
+background-color:#ffffff
+&lt;!--- result _ part3 _ glm_fit ---&gt;
+
+.pull-left[
+&lt;img src="figures/result_3.png"
+alt=""
+width="550px"
+height = "600px"   
+/&gt;
+]
+
+.pull-right[
+&lt;br&gt;
+&lt;img src="figures/result_4.png"
+alt=""
+width="600px"
+height = "550px"   
+/&gt;
+]
+
+---
+&lt;!--- conclusions ---&gt;
+
+## Key findings
+---------   ---------------
+&lt;br&gt;
+
+Extinction debts and colonization credits are widespread.
+
+---
+&lt;!--- conclusions ---&gt;
+
+## Key findings
+---------   ---------------
+&lt;br&gt;
+
+&gt;Extinction debts and colonization credits are widespread. 
+
+&lt;br&gt;
+Urban regions currently harbor a majority of _walking dead_ species.
+
+---
+&lt;!--- conclusions ---&gt;
+
+## Key findings
+---------   ---------------
+&lt;br&gt;
+
+&gt;Extinction debts and colonization credits are widespread. 
+
+&gt;Urban regions currently harbor a majority of _walking dead_ species.
+
+&lt;br&gt;
+Communities are affected by type, magnitude and directionality of past landscape changes.
+
+---
+&lt;!--- conclusions ---&gt;
+
+## Conclusions
+---------   ---------------
+- &lt;span style="font-size:110%"&gt;Biodiversity policy targets risk being severely out-of-date even as they are introduced.&lt;/span&gt;
+
+---
+&lt;!--- conclusions ---&gt;
+
+## Conclusions
+---------   ---------------
+- &lt;span style="font-size:110%"&gt;Biodiversity policy targets risk being severely out-of-date even as they are introduced.&lt;/span&gt;
+
+- &lt;span style="font-size:110%"&gt;Diversity estimates could be highly over/underestimating the real capacity of a landscape.&lt;/span&gt;
+
+---
+&lt;!--- conclusions ---&gt;
+
+## Conclusions
+---------   ---------------
+- &lt;span style="font-size:100%"&gt;Biodiversity policy targets risk being severely out-of-date even as they are introduced.&lt;/span&gt;
+
+- &lt;span style="font-size:100%"&gt;Diversity estimates could be highly over/underestimating the real capacity of a landscape.&lt;/span&gt;
+
+&lt;br&gt;
+&lt;span style="font-size:140%"&gt;__Past landscapes need to be considered and &lt;span style="color:#e71d36;font-size:110%"&gt;debts&lt;/span&gt; and &lt;span style="color:dodgerblue;font-size:110%"&gt;credits&lt;/span&gt; accounted for.__&lt;/span&gt;
+
+---
+
+## Next developments
+--------------
+
+- Exploring the impac
+
+---
+&lt;!--- ending slide ---&gt;
+
+
+&lt;font size="6"&gt; Haddou et al., &lt;font/&gt; &lt;font size="4.5"&gt; Widespread extinction debts and colonization
+credits in United States breeding bird communities &lt;font/&gt;&lt;font size="6"&gt; (2022) _Nature Ecology and Evolution_&lt;font/&gt;
+&lt;br&gt; 
+
+.left-column[
+
+&lt;img src="figures/paper_qr_code.png"
+alt=""
+width="300px"
+/&gt;
+&lt;img src="figures/uni_glasgow_logo.jpg"
+alt=""
+width="300px"
+/&gt;
+
+]
+
+.right-column[ 
+
+1&lt;sup&gt;st&lt;/sup&gt; year PhD student @ University of Glasgow
+#####[<i class="fa fa-envelope" role="presentation" aria-label="envelope icon"></i> yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)
+##### [<i class="fab fa-twitter" role="presentation" aria-label="twitter icon"></i> yacob_haddou](https://twitter.com/yacob_haddou)
+##### [<i class="fab fa-github" role="presentation" aria-label="github icon"></i> <i class="fab fa-researchgate" role="presentation" aria-label="researchgate icon"></i> .../valiriel](https://github.com/valiriel)
+&lt;font size="5"&gt; Slides coded with __Markdown &amp; xaringan__&lt;font/&gt;
+
+]  
+
+---
+&lt;br&gt;&lt;br/&gt;
+&lt;br&gt;&lt;br/&gt;
+# EXTRA SLIDES
+
+---
+
+background-color:#ffffff
+.left-column[
+&lt;br&gt;
+
+&lt;img src="figures/method_2_segments.png"
+alt=""
+width="250px"
+height = "400px"
+/&gt;
+]
+&lt;!--- method _ biodiversity data ---&gt;
+.right-column[
+&lt;img src="figures/method_1_routes.png"
+alt=""
+width="900px"
+height = "500px"   
+/&gt;
+]
+
+---
+background-color:#ffffff
+&lt;!--- method _ landscape data ---&gt;
+
+.pull-left[
+&lt;img src="figures/lc_maps.png"
+alt=""
+width="500px"
+height = "600px"   
+/&gt;
+]
+
+.pull-right[
+&lt;img src="figures/result_3.png"
+alt=""
+width="475px"
+height = "600px"   
+/&gt;
+]
+
+---
+
+background-color:#ffffff
+&lt;!--- result _ part1 _ uncertainty ---&gt;
+
+.center[
+&lt;img src="figures/result_1_uncertainty.png"
+alt=""
+width="1000px"
+height = "600px"   
+/&gt;
+]
+
+---
+background-color:#ffffff
+&lt;!--- result _ part1 _ validation ---&gt;
+
+.pull-left[
+&lt;br&gt;
+&lt;img src="figures/result_1_validation_2.png"
+alt=""
+width="550px"
+height = "500px"   
+/&gt;
+]
+
+.pull-right[
+&lt;br&gt;
+&lt;img src="figures/result_1_validation_1.png"
+alt=""
+width="550px"
+height = "500px"   
+/&gt;
+]
+
+---
+
+&lt;p&gt;The model was able to predict:
+- __current__ biodiversity experiencing the past landscape legacy,
+- __equilibrium__ biodiversity given the current landscape composition.
+
+&lt;br&gt;
+If equilibrium - current biodiversity &lt; 0 = &lt;b&gt;&lt;span style="color:crimson;font-size:120%"&gt;extinction debt&lt;/span&gt;&lt;/b&gt; 
+&lt;br&gt;&lt;br/&gt;
+
+If equilibrium - current biodiversity &gt; 0 = &lt;b&gt;&lt;span style="color:dodgerblue;font-size:120%"&gt;colonisation credit&lt;/span&gt;&lt;/b&gt;
+
+---
+
+background-color:#ffffff
+&lt;!--- result _ part2 _ text ---&gt;
+
+.center[
+&lt;img src="figures/result_2.png"
+alt=""
+width="900px"
+height = "600px"   
+/&gt;
+]
+
+---
+&lt;!--- result _ base  ---&gt;
+## Results
+------------------------
+
+1. Distribution of extinction debts and colonization credits across landscapes of the whole contiguous USA.
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+2. Change in contribution between past and present landscapes as a function of estimated parameters.
+&lt;br&gt; &lt;br&gt; &lt;br&gt;
+3. Which land cover change histories result in either debts or credits.
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "Yacob Haddou _ ISEC 2022 _ %current%/%total%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

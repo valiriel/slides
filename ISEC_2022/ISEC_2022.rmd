@@ -1,0 +1,762 @@
+---
+#title: "ISEC_presentation_2022"
+#subtitle: ""  
+#author: "Yacob Haddou"
+#date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    css: xaringan-themer.css
+    seal: false
+    nature:
+      titleSlideClass: ["left"]
+      slideNumberFormat: "Yacob Haddou _ ISEC 2022 _ %current%/%total%"
+      highlightStyle: github
+      highlightLines: true
+      ratio: 16:9
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  fig.retina=2,
+  out.width = "100%",
+  cache = FALSE,
+  echo = TRUE,
+  message = FALSE, 
+  warning = FALSE,
+  hiline = TRUE,
+  tidy=TRUE
+)
+
+library(xaringan); library(fontawesome); library(tidyverse)
+```
+
+```{r xaringan-tile-view, echo=FALSE}
+xaringanExtra::use_tile_view()
+```
+
+```{r xaringan-scribble, echo=FALSE}
+xaringanExtra::use_scribble()
+```
+
+```{r xaringanExtra, echo = FALSE}
+xaringanExtra::use_progress_bar(color = "#f5deb3", location = "bottom")
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_duo_accent_inverse(
+  primary_color = "#f5deb3",
+  secondary_color = "#d1b1f0",
+  text_color = "#fffff0",
+  header_font_google = google_font("Quicksand"),
+  text_font_google = google_font("Quicksand"),
+  code_font_google = google_font("Fira Pro"),
+  text_font_size = "150%"
+  )
+```
+
+<img src="figures/ISEC_introductory.png"
+alt=""
+width="1050px"
+/>
+
+---
+
+<!--- title slide --->
+
+<br><br/>
+
+.right[
+##<span style="color:#e71d36;font-size:120%">Extinction debts</span> and <span style="color:#1e90ff;font-size:120%">colonisation credits</span> <br> in United States breeding bird communities
+]
+
+----
+<b><font size="5.5">Yacob Haddou, Jason Matthiopolous, Sofie Spatharis, Rebecca Mancy, Davide Dominoni </font></b>
+
+---
+<!--- ending slide --->
+
+
+<font size="6"> Haddou et al., <font/> <font size="4.5"> Widespread extinction debts and colonization
+credits in United States breeding bird communities <font/><font size="6"> (2022) _Nature Ecology and Evolution_<font/>
+<br> 
+
+.left-column[
+
+<img src="figures/paper_qr_code.png"
+alt=""
+width="300px"
+/>
+<img src="figures/uni_glasgow_logo.jpg"
+alt=""
+width="300px"
+/>
+
+]
+
+.right-column[ 
+
+1<sup>st</sup> year PhD student @ University of Glasgow
+#####[`r fa_i("envelope")` yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)
+##### [`r fa_i("twitter")` yacob_haddou](https://twitter.com/yacob_haddou)
+##### [`r fa_i("github")` `r fa_i("researchgate")` .../valiriel](https://github.com/valiriel)
+<font size="5"> Slides coded with __Markdown & xaringan__<font/>
+
+]  
+
+---
+<!--- intro _ debts/credits/delays explanation --->
+
+## Background
+------------------------
+
+Landscapes shape the communities inhabiting them.
+
+---
+<!--- intro _ debts/credits/delays explanation --->
+
+## Background
+------------------------
+
+Landscapes shape the communities inhabiting them.
+
+> Biotic responses to land cover changes are rarely instantaneous & rather subject to gradual extinctions and colonisations through time.
+
+---
+<!--- intro _ debts/credits/delays explanation --->
+
+## Background
+------------------------
+
+Landscapes shape the communities inhabiting them.
+
+> Biotic responses to land cover changes are rarely instantaneous & rather subject to gradual extinctions and colonisations through time.
+
+Estimates of biodiversity and population sizes depend on both:
+- __past__ history of complex legacies from gone landscapes
+- __present__ habitat composition 
+- __future__ of delayed debts and credits to be re-payed
+<br><br>
+---
+<!--- intro _ debts/credits/delays explanation --->
+
+## <span style="color:#e71d36;font-size:110%">Extinction debts</span> and <span style="color:#1e90ff;font-size:110%">Colonisation credits</span>
+------------------------
+
+1. <p>Community at __equilibrium__ in a given landscape.
+<br><br>
+
+
+---
+<!--- intro _ debts/credits/delays explanation --->
+
+## <span style="color:#e71d36;font-size:110%">Extinction debts</span> and <span style="color:#1e90ff;font-size:110%">Colonisation credits</span>
+------------------------
+
+1. <p>Community at __equilibrium__ in a given landscape.
+<br><br>
+
+2. <p> A disturbance of the landscape takes place.
+<br><br>
+
+---
+<!--- intro _ debts/credits/delays explanation --->
+
+## <span style="color:#e71d36;font-size:110%">Extinction debts</span> and <span style="color:#1e90ff;font-size:110%">Colonisation credits</span>
+------------------------
+
+1. <p>Community at __equilibrium__ in a given landscape.
+<br><br>
+
+2. <p>A disturbance of the landscape takes place.
+<br><br>
+
+3. <p>Now you have a __"new"__ landscape inhabited by an __"old"__ community.
+<br><br>
+
+---
+<!--- intro _ debts/credits/delays explanation --->
+
+## <span style="color:#e71d36;font-size:110%">Extinction debts</span> and <span style="color:#1e90ff;font-size:110%">Colonisation credits</span>
+------------------------
+
+1. <p>Community at __equilibrium__ in a given landscape.
+<br><br>
+
+2. <p>A disturbance of the landscape takes place.
+<br><br>
+
+3. <p>Now you have a __"new"__ landscape inhabited by an __"old"__ community.
+<br><br>
+
+4. The community response is lagged and will require time to equilibriate.
+
+---
+<!--- intro _ debts/credits/delays explanation --->
+
+## <span style="color:#e71d36;font-size:110%">Extinction debts</span> and <span style="color:#1e90ff;font-size:110%">Colonisation credits</span>
+------------------------
+
+These delayed responses will manifest either as an:
+<br><br>
+
+---
+<!--- intro _ debts/credits/delays explanation --->
+
+## <span style="color:#e71d36;font-size:110%">Extinction debts</span> and <span style="color:#1e90ff;font-size:110%">Colonisation credits</span>
+------------------------
+
+These delayed responses will manifest either as an:
+<br><br>
+
+<b><span style="color:crimson;font-size:170%">extinction debt</span></b> &nbsp;&nbsp;&nbsp; new equilibrium < current biodiversity
+<br><br/>
+
+---
+<!--- intro _ debts/credits/delays explanation --->
+
+## <span style="color:#e71d36;font-size:110%">Extinction debts</span> and <span style="color:#1e90ff;font-size:110%">Colonisation credits</span>
+------------------------
+
+These delayed responses will manifest either as an:
+<br><br>
+
+<b><span style="color:crimson;font-size:170%">extinction debt</span></b> &nbsp;&nbsp;&nbsp; new equilibrium < current biodiversity
+<br>
+
+or
+
+<b><span style="color:dodgerblue;font-size:170%">colonisation credit</span></b> &nbsp;&nbsp;&nbsp;  new equilibrium > current biodiversity
+
+---
+
+<!--- intro _ why care? --->
+
+## Why worry?
+------------------------
+
+- Ignoring <b><span style="color:crimson;font-size:150%"> debts </span></b> makes us over-optimistic of conservation as well as oblivious of extinctions that are already present but not yet manifested in the landscape.
+
+- Ignoring <b><span style="color:dodgerblue;font-size:150%"> credits </span></b> will lead to under-estimates of the current status and result in superfluous policies and efforts that could be better placed.
+
+---
+
+<!--- intro _ research aims/hypothesis --->
+
+## Aims
+------------------------
+
+> Quantify the contribution of past and present landscapes on current species diversity and predict <span style="color:crimson;font-size:100%">extinction debts</span> and  <span style="color:#1e90ff;font-size:100%">colonisation credits</span> at a continental scale.
+
+---
+
+<!--- intro _ research aims/hypothesis --->
+
+## Aims
+------------------------
+
+> Quantify the contribution of past and present landscapes on current species diversity and predict <span style="color:crimson;font-size:100%">extinction debts</span> and  <span style="color:#1e90ff;font-size:100%">colonisation credits</span> at a continental scale.
+
+<br>
+
+To do so we used:
+- __Effective number of species__ of 2880 US bird communities 
+- __Landscape __ over __15-years__ & across the __whole contiguous USA__
+
+---
+<!--- method _ methods base --->
+.pull-left[
+
+## __Biodiversity data__
+
+---------
+
+North America Breeding Bird Survey
+
+<span style="font-size:90%"> ~ 4000 routes, each ~ 40km long </span>
+<br><br>]
+
+.pull-right[
+<br><br>
+<img src="figures/method_1_routes.png"
+alt=""
+width="650px"
+height = "350px"   
+/>
+]
+
+---
+<!--- method _ methods base --->
+.pull-left[
+
+## __Biodiversity data__
+
+---------
+
+North America Breeding Bird Survey
+
+<span style="font-size:90%"> ~ 4000 routes, each ~ 40km long </span>
+<br><br>
+
+- <span style="font-size:90%"> 960 routes & 2880 communities </span> 
+
+- <span style="font-size:90%"> Species abundance over 3-years & __Effective number of species__. </span>
+</span>
+
+]
+
+.pull-right[
+<br><br>
+<img src="figures/method_1_routes.png"
+alt=""
+width="650px"
+height = "350px"   
+/>
+]
+
+---
+<!--- method _ landscape data --->
+.pull-left[
+
+## __Landscape data__
+
+---------
+<span style="font-size:90%">USGS National Land Cover Database</span>
+
+<span style="font-size:90%">Triennal raster data, 30m<sup>2</sup> pixel.</span>
+
+]
+
+.pull-right[.center[
+<img src="figures/lc_maps.png"
+alt=""
+width="475px"
+height = "550px"   
+/>
+]]
+
+---
+<!--- method _ landscape data --->
+.pull-left[
+
+## __Landscape data__
+
+---------
+<span style="font-size:90%">USGS National Land Cover Database</span>
+
+<span style="font-size:90%">Triennal raster data, 30m<sup>2</sup> pixel.</span>
+
+<span style="font-size:90%">Aggregated to: <b><span style="color:#a3a3a3 ;">Urban</span></b>, <b><span style="color:#3b7a57;">Forest</span></b>, <b><span style="color:#32cd32;">Grassland</span></b>, <b><span style="color:#e1ad21;">Cropland</span></b>, <b><span style="color:#ba55d3;">Wetland</span></b></span>
+
+<span style="font-size:90%">Calculated for each land cover:
+- <span style="font-size:90%"> % of land cover in 2001 and 2016
+- <span style="font-size:90%"> % point change between timepoints</span>
+]
+
+.pull-right[.center[
+<img src="figures/lc_maps.png"
+alt=""
+width="475px"
+height = "550px"   
+/>
+]]
+
+---
+<!--- method _ methods base --->
+
+## Modelling
+------------------------
+
+$$Diversity_{s,t}\sim\ Normal(µ_{s,t},σ)$$
+
+$$µ_{s,t} = \color{#ff70a6}{f(x_{s,t_2};β)}\color{#fca311}{ω(y_{s,t1,t2};γ)}+\color{#ff70a6}{f(x_{s,t_1};β)}\color{#fca311}{(1-ω(y_{s,t_1,t_2};γ))}+\color{#aaf683}{g(z_s;\alpha)}$$
+<br>
+- <b><span style="color:#ff70a6;font-size:100%">equilibrium component</span></b>
+
+- <b><span style="color:#fca311;font-size:100%">temporal legacy component</span></b>
+
+- <b><span style="color:#aaf683;font-size:100%">static component</span></b> (survey condition covariates)
+
+---
+<!--- method _ equilibrium component --->
+
+## <span style="color:#ff70a6">Equilibrium component</span>
+------------------------
+
+<br>
+
+$$µ_{s,t} = \color{#ff70a6}{f(x_{s,t_2};β)}ω(y_{s,t1,t2};γ)+\color{#ff70a6}{f(x_{s,t_1};β)}(1-ω(y_{s,t_1,t_2};γ))+g(z_s;\alpha)$$
+<br>
+Linear and quadratic terms for each land cover + pairwise interactions.
+
+Parameters are estimated once and fixed between _t1_ and _t2_.
+
+It represents the diversity of a given landscape at equilibrium.
+
+---
+<!--- method _ delay component --->
+
+## <span style="color:#fca311">Temporal legacy component</span>
+------------------------
+
+<br>
+
+$$µ_{s,t} = f(x_{s,t_2};β)\color{#fca311}{ω(y_{s,t1,t2};γ)}+f(x_{s,t_1};β)\color{#fca311}{(1-ω(y_{s,t_1,t_2};γ))}+g(z_s;\alpha)$$
+<br>
+<!--- Land cover change _y_, at location _s_, per land cover _i_ and directionality _z_ between _t1_ and _t2_. --->
+
+It weights the proportional contribution of the two equilibria, as a function of __magnitude__, __directionality__ and __type__ of land cover change between _t1_ and _t2_.
+
+---
+<!--- method _ static additive component --->
+
+## <span style="color:#aaf683">Static component</span>
+------------------------
+
+<br>
+
+$$µ_{s,t} = f(x_{s,t_2};β)ω(y_{s,t1,t2};γ)+f(x_{s,t_1};β)(1-ω(y_{s,t_1,t_2};γ))+\color{#aaf683}{g(z_s;\alpha)}$$
+<br>
+Linear and quadratic effect for temperature in 2016.
+
+Landscape heterogeneity, as effective number of land covers.
+
+Survey time of day & observer level random effect.
+
+---
+
+<!--- method _ recap of modelling base --->
+
+## Model fitting
+------------------------
+
+<br>
+
+$$µ_{s,t} = \color{#ff70a6}{f(x_{s,t_2};β)}\color{#fca311}{ω(y_{s,t1,t2};γ)}+\color{#ff70a6}{f(x_{s,t_1};β)}\color{#fca311}{(1-ω(y_{s,t_1,t_2};γ))}+\color{#aaf683}{g(z_s;\alpha)}$$
+<br>
+Fitted in Bayesian framework with STAN.
+
+Priors set with shrinkage properties. 
+
+WAIC-loo driven selection between buffer sizes.
+
+Uncertainty propagation via posterior sampling.
+
+---
+<!--- result _ part1 _ text --->
+
+### Distribution of delays across landscapes of the USA
+------------------------
+
+Overall, 52% of the contiguous USA territory is expected to lose species and 48% to gain species.
+<br> <br>
+> <span style="color:crimson;font-size:110%">Extinction debts</span> are concentrated around metropolitan regions.
+> <span style="color:dodgerblue;font-size:110%">Colonisation credit</span> are localised in less inhabited areas.
+
+<br>
+
+- Biodiversity predictions in 2016 matched the observed data.
+
+- Debts and credits were also compared with more recent survey data.
+
+---
+background-color:#ffffff
+<!--- result _ part1 _ USA_map --->
+<!--- start by talking about delays are everywhere and then pinpoint urban areas (go through city names) and more remotes leadign to next slides --->
+.center[
+<img src="figures/result_1.png"
+alt=""
+width="950px"
+height = "625px"   
+/>
+]
+
+---
+<!--- result _ part3 _ lc change maps --->
+
+### Land cover change effect on debts or credits
+------------------------
+
+Landscape modifications have not been homogeneous across the USA.
+
+<br>
+
+
+---
+
+background-color:#ffffff
+<!--- result _ part3 _ glm_fit --->
+
+.pull-left[
+<img src="figures/result_3.png"
+alt=""
+width="550px"
+height = "600px"   
+/>
+]
+
+---
+
+background-color:#ffffff
+<!--- result _ part3 _ glm_fit --->
+
+.pull-left[
+<img src="figures/result_3.png"
+alt=""
+width="550px"
+height = "600px"   
+/>
+]
+
+.pull-right[.center[
+<br><br><br><br>
+
+<span style="color:black;">Debts and credits magnitude</span>
+
+<span style="color:black;"> ~</span>
+
+<span style="color:black;"> landscape change</span>
+]]
+
+---
+background-color:#ffffff
+<!--- result _ part3 _ glm_fit --->
+
+.pull-left[
+<img src="figures/result_3.png"
+alt=""
+width="550px"
+height = "600px"   
+/>
+]
+
+.pull-right[
+<br>
+<img src="figures/result_4.png"
+alt=""
+width="600px"
+height = "550px"   
+/>
+]
+
+---
+<!--- conclusions --->
+
+## Key findings
+---------   ---------------
+<br>
+
+Extinction debts and colonization credits are widespread.
+
+---
+<!--- conclusions --->
+
+## Key findings
+---------   ---------------
+<br>
+
+>Extinction debts and colonization credits are widespread. 
+
+<br>
+Urban regions currently harbor a majority of _walking dead_ species.
+
+---
+<!--- conclusions --->
+
+## Key findings
+---------   ---------------
+<br>
+
+>Extinction debts and colonization credits are widespread. 
+
+>Urban regions currently harbor a majority of _walking dead_ species.
+
+<br>
+Communities are affected by type, magnitude and directionality of past landscape changes.
+
+---
+<!--- conclusions --->
+
+## Conclusions
+---------   ---------------
+- <span style="font-size:110%">Biodiversity policy targets risk being severely out-of-date even as they are introduced.</span>
+
+---
+<!--- conclusions --->
+
+## Conclusions
+---------   ---------------
+- <span style="font-size:110%">Biodiversity policy targets risk being severely out-of-date even as they are introduced.</span>
+
+- <span style="font-size:110%">Diversity estimates could be highly over/underestimating the real capacity of a landscape.</span>
+
+---
+<!--- conclusions --->
+
+## Conclusions
+---------   ---------------
+- <span style="font-size:100%">Biodiversity policy targets risk being severely out-of-date even as they are introduced.</span>
+
+- <span style="font-size:100%">Diversity estimates could be highly over/underestimating the real capacity of a landscape.</span>
+
+<br>
+<span style="font-size:140%">__Past landscapes need to be considered and <span style="color:#e71d36;font-size:110%">debts</span> and <span style="color:dodgerblue;font-size:110%">credits</span> accounted for.__</span>
+
+---
+
+## Next developments
+--------------
+
+- Exploring the impac
+
+---
+<!--- ending slide --->
+
+
+<font size="6"> Haddou et al., <font/> <font size="4.5"> Widespread extinction debts and colonization
+credits in United States breeding bird communities <font/><font size="6"> (2022) _Nature Ecology and Evolution_<font/>
+<br> 
+
+.left-column[
+
+<img src="figures/paper_qr_code.png"
+alt=""
+width="300px"
+/>
+<img src="figures/uni_glasgow_logo.jpg"
+alt=""
+width="300px"
+/>
+
+]
+
+.right-column[ 
+
+1<sup>st</sup> year PhD student @ University of Glasgow
+#####[`r fa_i("envelope")` yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)
+##### [`r fa_i("twitter")` yacob_haddou](https://twitter.com/yacob_haddou)
+##### [`r fa_i("github")` `r fa_i("researchgate")` .../valiriel](https://github.com/valiriel)
+<font size="5"> Slides coded with __Markdown & xaringan__<font/>
+
+]  
+
+---
+<br><br/>
+<br><br/>
+# EXTRA SLIDES
+
+---
+
+background-color:#ffffff
+.left-column[
+<br>
+
+<img src="figures/method_2_segments.png"
+alt=""
+width="250px"
+height = "400px"
+/>
+]
+<!--- method _ biodiversity data --->
+.right-column[
+<img src="figures/method_1_routes.png"
+alt=""
+width="900px"
+height = "500px"   
+/>
+]
+
+---
+background-color:#ffffff
+<!--- method _ landscape data --->
+
+.pull-left[
+<img src="figures/lc_maps.png"
+alt=""
+width="500px"
+height = "600px"   
+/>
+]
+
+.pull-right[
+<img src="figures/result_3.png"
+alt=""
+width="475px"
+height = "600px"   
+/>
+]
+
+---
+
+background-color:#ffffff
+<!--- result _ part1 _ uncertainty --->
+
+.center[
+<img src="figures/result_1_uncertainty.png"
+alt=""
+width="1000px"
+height = "600px"   
+/>
+]
+
+---
+background-color:#ffffff
+<!--- result _ part1 _ validation --->
+
+.pull-left[
+<br>
+<img src="figures/result_1_validation_2.png"
+alt=""
+width="550px"
+height = "500px"   
+/>
+]
+
+.pull-right[
+<br>
+<img src="figures/result_1_validation_1.png"
+alt=""
+width="550px"
+height = "500px"   
+/>
+]
+
+---
+
+<p>The model was able to predict:
+- __current__ biodiversity experiencing the past landscape legacy,
+- __equilibrium__ biodiversity given the current landscape composition.
+
+<br>
+If equilibrium - current biodiversity < 0 = <b><span style="color:crimson;font-size:120%">extinction debt</span></b> 
+<br><br/>
+
+If equilibrium - current biodiversity > 0 = <b><span style="color:dodgerblue;font-size:120%">colonisation credit</span></b>
+
+---
+
+background-color:#ffffff
+<!--- result _ part2 _ text --->
+
+.center[
+<img src="figures/result_2.png"
+alt=""
+width="900px"
+height = "600px"   
+/>
+]
+
+---
+<!--- result _ base  --->
+## Results
+------------------------
+
+1. Distribution of extinction debts and colonization credits across landscapes of the whole contiguous USA.
+<br> <br> <br>
+2. Change in contribution between past and present landscapes as a function of estimated parameters.
+<br> <br> <br>
+3. Which land cover change histories result in either debts or credits.
+
+---
