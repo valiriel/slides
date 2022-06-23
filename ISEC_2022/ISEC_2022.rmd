@@ -73,7 +73,7 @@ width="1050px"
 ]
 
 ----
-<b><font size="5.5">Yacob Haddou, Jason Matthiopolous, Sofie Spatharis, Rebecca Mancy, Davide Dominoni </font></b>
+<b><font size="5.5">Yacob Haddou, Jason Matthiopoulos, Sofie Spatharis, Rebecca Mancy, Davide Dominoni </font></b>
 
 ---
 <!--- ending slide --->
@@ -606,12 +606,6 @@ Communities are affected by type, magnitude and directionality of past landscape
 
 ---
 
-## Next developments
---------------
-
-- Exploring the impac
-
----
 <!--- ending slide --->
 
 
