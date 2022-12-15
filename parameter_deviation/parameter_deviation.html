@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>parameter_deviation.knit</title>
+    <meta charset="utf-8" />
+    <script src="parameter_deviation_files/header-attrs/header-attrs.js"></script>
+    <link href="parameter_deviation_files/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="parameter_deviation_files/tile-view/tile-view.js"></script>
+    <script src="parameter_deviation_files/fabric/fabric.min.js"></script>
+    <link href="parameter_deviation_files/xaringanExtra-scribble/scribble.css" rel="stylesheet" />
+    <script src="parameter_deviation_files/xaringanExtra-scribble/scribble.js"></script>
+    <script>document.addEventListener('DOMContentLoaded', function() { window.xeScribble = new Scribble({"pen_color":["#FF0000"],"pen_size":3,"eraser_size":30,"palette":[]}) })</script>
+    <script src="parameter_deviation_files/xaringanExtra-progressBar/progress-bar.js"></script>
+    <link href="parameter_deviation_files/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="parameter_deviation_files/font-awesome/css/v4-shims.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+<style>.xe__progress-bar__container {
+  bottom:0;
+  opacity: 1;
+  position:absolute;
+  right:0;
+  left: 0;
+}
+.xe__progress-bar {
+  height: 0.25em;
+  background-color: #1b9aaa;
+  width: calc(var(--slide-current) / var(--slide-total) * 100%);
+}
+.remark-visible .xe__progress-bar {
+  animation: xe__progress-bar__wipe 200ms forwards;
+  animation-timing-function: cubic-bezier(.86,0,.07,1);
+}
+@keyframes xe__progress-bar__wipe {
+  0% { width: calc(var(--slide-previous) / var(--slide-total) * 100%); }
+  100% { width: calc(var(--slide-current) / var(--slide-total) * 100%); }
+}</style>
+
+
+&lt;br&gt;
+&lt;font size="6"&gt; __Main research theme__ : to understand and develop ways to quantify the delayed responses of organisms to environmental changes &lt;font/&gt;
+&lt;br&gt;
+
+2&lt;sup&gt;nd&lt;/sup&gt; year PhD student in MVLS DTP
+
+#####[<i class="fa fa-envelope" role="presentation" aria-label="envelope icon"></i> yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)
+
+##### [<i class="fab fa-twitter" role="presentation" aria-label="twitter icon"></i> yacob_haddou](https://twitter.com/yacob_haddou)
+
+##### [<i class="fab fa-github" role="presentation" aria-label="github icon"></i> <i class="fab fa-researchgate" role="presentation" aria-label="researchgate icon"></i> .../valiriel](https://github.com/valiriel)
+
+&lt;font size="5"&gt; Slides coded with __markdown &amp; xaringan__&lt;font/&gt;
+
+---
+&lt;br&gt;
+
+&lt;br&gt;
+
+&lt;font size="7"&gt;
+
+A __very__ simple example on how to infer a species-environment relationship and make predictions ( a.k.a __S__pecies __D__istribution __M__odels )
+
+&lt;font/&gt;
+
+---
+&lt;font size="8"&gt;1 &lt;font/&gt; &lt;font size="6"&gt;- Do fieldwork or download some data on a species abundance (y) + source some variables of interest (x)
+&lt;font/&gt;
+
+.center[
+&lt;img src="figures/example_table.png"
+alt=""
+width="400px"
+/&gt;
+]
+
+---
+&lt;font size="8"&gt;2 &lt;font/&gt; &lt;font size="6"&gt;- Estimate the relationship between population &amp; environment by fitting some form of glm-like approach  
+&lt;font/&gt;&lt;font size="6"&gt;
+
+&lt;br&gt;
+&lt;br&gt;
+
+`\(population  \sim\ f(environment)\)`
+&lt;br&gt;
+
+`\(y = mx + c\)`
+&lt;br&gt;
+
+---
+&lt;font size="8"&gt;3 &lt;font/&gt; &lt;font size="6"&gt;- make inference and useful predictions from retrieved coefficients
+&lt;font/&gt;&lt;font size="6"&gt;
+
+.center[
+&lt;img src="figures/shrinkage_grid.png"
+alt=""
+width="605px"
+/&gt;
+]
+---
+.center[
+&lt;img src="figures/walk1.png"
+alt=""
+width="1200px"
+/&gt;
+]
+---
+&lt;br&gt;
+
+&lt;br&gt;
+
+# PLOT TWIST
+------------------------
+&lt;font size="7.5"&gt;
+the predictions could instead be this if you sampled at another timepoint...
+
+---
+
+.center[
+&lt;img src="figures/walk2.png"
+alt=""
+width="1200px"
+/&gt;
+]
+
+---
+
+.center[
+&lt;img src="figures/walk3.png"
+alt=""
+width="1200px"
+/&gt;
+]
+---
+
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## why does this happen?
+------------------------
+
+Biotic responses to environmental change are often delayed through time.
+
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## Background
+------------------------
+
+&gt; Biotic responses to environmental change are often delayed through time.
+
+&lt;br&gt;
+
+Observed population and diversity metrics can be an __over/underestimation__ of the true capacity a landscape could support.
+
+Imagine a population below or above carrying capacity. 
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## Background
+------------------------
+
+&gt; Biotic responses to environmental change are often delayed through time.
+
+&gt; Observed population and diversity metrics can be an over/underestimation of the true landscape capacity. 
+
+&lt;br&gt;
+
+Most predictive models of population dynamics and biodiversity do not control for this and __subconsciously make a pseudo-equilibrium assumption.__
+
+---
+
+&lt;!--- explain medias res ---&gt;
+
+&lt;br&gt;&lt;br/&gt;
+.left[#*In Medias Res*
+]
+
+To begin **a story** in the midst of of things. 
+
+Making **a moment in the timeline** your **point of view,** 
+
+whenever it occurs in the **chronology of events,** 
+
+and to let it determine your **opinions on the matter.**&lt;/font&gt;
+
+---
+&lt;!--- explain medias res ---&gt;
+
+&lt;br&gt;&lt;br/&gt;
+.left[#*In Medias Res*
+]
+
+To begin **an analysis** in the midst of things.
+
+Making **an equilibrium assumption** on your **sampling event,** 
+
+whenever it occurs in the **history of change,** 
+
+and to let it determine your **inference &amp; predictions.**
+
+---
+&lt;!--- literal pun aside I am here to talk you about ---&gt;
+
+&lt;br&gt;&lt;br/&gt;
+
+.right[## Environmental change inflates and shrinks the relationship between variables 
+]
+
+----
+&lt;b&gt;&lt;font size="5"&gt; Yacob Haddou, Sofie Spatharis, Rebecca Mancy, Davide Dominoni, Jason Matthiopoulos &lt;/font&gt;&lt;/b&gt;
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## Concept
+------------------------
+
+1. &lt;p&gt;Community at __equilibrium__ in a given landscape.
+&lt;br&gt;&lt;br&gt;
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## Concept
+------------------------
+
+1. &lt;p&gt;Community at __equilibrium__ in a given landscape.
+&lt;br&gt;&lt;br&gt;
+
+2. &lt;p&gt; A disturbance of the landscape takes place.
+&lt;br&gt;&lt;br&gt;
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## Concept
+------------------------
+
+1. &lt;p&gt;Community at __equilibrium__ in a given landscape.
+&lt;br&gt;&lt;br&gt;
+
+2. &lt;p&gt;A disturbance of the landscape takes place.
+&lt;br&gt;&lt;br&gt;
+
+3. &lt;p&gt;Now you have a __"new"__ landscape inhabited by an __"old"__ community.
+&lt;br&gt;&lt;br&gt;
+
+---
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## Concept
+------------------------
+
+1. &lt;p&gt;Community at __equilibrium__ in a given landscape.
+&lt;br&gt;&lt;br&gt;
+
+2. &lt;p&gt;A disturbance of the landscape takes place.
+&lt;br&gt;&lt;br&gt;
+
+3. &lt;p&gt;Now you have a __"new"__ landscape inhabited by an __"old"__ community.
+&lt;br&gt;&lt;br&gt;
+
+4. The community response is lagged and will require time to equilibriate.
+
+---
+## how did I get here?
+------------------------
+
+Previously understood how present biodiversity can be explained by a __mixture of past and present variables__ depending on the __magnitude, directionality and type__ of landscape change.
+.center[
+&lt;img src="figures/other_paper.png"
+alt=""
+width="1000px"
+/&gt;]
+
+---
+
+&lt;!--- intro _ debts/credits/delays explanation ---&gt;
+
+## &lt;span style="color:#e71d36;font-size:110%"&gt;Extinction debts&lt;/span&gt; and &lt;span style="color:#1e90ff;font-size:110%"&gt;Colonisation credits&lt;/span&gt;
+------------------------
+
+These delayed responses will manifest either as an:
+&lt;br&gt;&lt;br&gt;
+
+&lt;b&gt;&lt;span style="color:crimson;font-size:170%"&gt;extinction debt&lt;/span&gt;&lt;/b&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp; new equilibrium &lt; current biodiversity
+&lt;br&gt;
+
+or
+
+&lt;b&gt;&lt;span style="color:dodgerblue;font-size:170%"&gt;colonisation credit&lt;/span&gt;&lt;/b&gt; &amp;nbsp;&amp;nbsp;&amp;nbsp;  new equilibrium &gt; current biodiversity
+
+---
+
+## Why worry?
+------------------------
+
+- Ignoring &lt;b&gt;&lt;span style="color:crimson;font-size:150%"&gt; debts &lt;/span&gt;&lt;/b&gt; makes us over-optimistic of conservation as well as oblivious of extinctions that are already present but not yet manifested in the landscape.
+
+- Ignoring &lt;b&gt;&lt;span style="color:dodgerblue;font-size:150%"&gt; credits &lt;/span&gt;&lt;/b&gt; will lead to under-estimates of the current status and result in superfluous policies and efforts that could be better placed.
+
+---
+Predicted debts and credits in biodiversity across the whole contiguous USA
+
+.center[
+&lt;img src="figures/usmap.png"
+alt=""
+width="800px"
+/&gt;]
+
+---
+.center[
+&lt;img src="figures/spongebob_meme.jpg"
+alt=""
+width="800px"
+/&gt;]
+
+Decided to read every methodology ever attempted in the field of ecological delays ...
+
+---
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+&gt; __No unified, agreed, applicable framework exists__
+
+&lt;br&gt;
+Let's work towards it
+
+Exploring the process leading to delays in population dynamics through time instead of a broader biodiversity approach
+
+---
+
+We started thinking how these delays impact modelling, inference and predictions, in particular for:
+
+__spatially bound Species Distribution Models__ and 
+__temporally explicit population trajectories__.
+
+
+---
+
+&lt;font size="4"&gt;
+We started thinking how these delays impact modelling, inference and predictions, in particular for:
+
+__spatially bound Species Distribution Models__ and __temporally explicit population trajectories__.
+
+&lt;font size="6"&gt; 
+&lt;br&gt;
+## hypotheses ?
+------------------------
+
+Populations __&lt;__ carrying capacity __=__ growing in time __=__ underestimate 
+
+Populations __&gt;__ carrying capacity __=__ decreasing __=__ overestimate 
+
+---
+## how do we prove this ?
+------------------------
+
+&lt;b&gt; 1. Source patterns of unidirectional change, for ___s___ locations and __t__ timepoints 
+
+&lt;br&gt;
+
+&lt;font size="7"&gt; 
+x @ s,t
+
+&lt;br&gt;
+
+&lt;font size="5"&gt; 3 types of overall ___x___ patterns : upward, downward and stable
+
+---
+## how do we prove this ?
+------------------------
+&lt;font size="4"&gt;
+1. Source patterns of unidirectional change, for ___s___ locations and ___t___ timepoints 
+
+&lt;font size="6"&gt;
+&lt;b&gt; 2. Play god and invent a species with a given relationship, ___β___, to ___x___ 
+
+&lt;br&gt;
+
+&lt;font size="6"&gt;$$invented Species = f(x_{s,t};β)$$
+&lt;font size="6"&gt;$$β = invented Relationship$$
+
+---
+## how do we prove this ?
+------------------------
+&lt;font size="4"&gt;
+1. Source patterns of unidirectional change, for ___s___ locations and ___t___ timepoints 
+2. Play god and invent a species with a given relationship, ___β___, to ___x___ 
+
+&lt;font size="6"&gt;
+&lt;b&gt; 3. Calculate a carrying capacity, ___K___, for each __x__ (timepoint x location)
+
+&lt;br&gt;
+&lt;font size="6"&gt;
+`\(K_{s,t} = exp(f(x_{s,t};β)\)`
+
+---
+## how do we prove this ?
+------------------------
+&lt;font size="4"&gt;
+1. Source patterns of unidirectional change, for ___s___ locations and ___t___ timepoints 
+2. Play god and invent a species with a given relationship, ___β___, to ___x___ 
+3. Calculate a carrying capacity, ___K___, for each __x__ (timepoint x location)
+
+&lt;font size="6"&gt;
+&lt;b&gt; 4. Set your initial population size, ___N___, to be = to ___K___ @ t=1
+
+&lt;font size="6"&gt; `\(N_{s,t1} = K_{s,t1}\)`
+&lt;font size="5"&gt; the system starts at equilibrium, attained carrying capacity, no past legacy from environmental disturbance
+
+---
+## how do we prove this ?
+------------------------
+&lt;font size="4"&gt;
+1. Source patterns of unidirectional change, for ___s___ locations and ___t___ timepoints 
+2. Play god and invent a species with a given relationship, ___β___, to ___x___ 
+3. Calculate a carrying capacity, ___K___, for each __x__ (timepoint x location)
+4. Set your initial population size, ___N___, to be = to ___K___ @ t=1
+
+&lt;font size="6"&gt;
+&lt;b&gt; 5. Run your population through the ___Ks___ via Ricker logistic function
+
+&lt;font size="6"&gt; `\(N_{t+1} = N_{t} e^{r(K_t  - N_t )}\)`
+&lt;font size="5"&gt; repeat this in parallel for a vector of potential response speeds, ___r___ and across your patterns of ___x___
+
+---
+## how do we prove this ?
+------------------------
+&lt;font size="4"&gt;
+1. Source patterns of unidirectional change, for ___s___ locations and ___t___ timepoints 
+2. Play god and invent a species with a given relationship, ___β___, to ___x___ 
+3. Calculate a carrying capacity, ___K___, for each __x__ (timepoint x location)
+4. Set your initial population size, ___N___, to be = to ___K___ @ t=1
+5. Run your population through the ___Ks___ via Ricker logistic function
+
+&lt;font size="6"&gt;
+&lt;b&gt;6. Isolate and  model the final timepoint population size ___N___ and covariate ___x___ 
+
+&lt;font size="6"&gt; `\(N_{s,t} \sim\ Poisson(f(x_{s,t};β))\)`
+&lt;font size="5"&gt; separately for each pairwise grouping of __r__ and patterns of ___x___ 
+
+---
+## how do we prove this ?
+------------------------
+&lt;font size="5"&gt;
+1. Source patterns of unidirectional change, for ___s___ locations and ___t___ timepoints 
+2. Play god and invent a species with a given relationship, ___β___, to ___x___ 
+3. Calculate a carrying capacity, ___K___, for each __x__ (timepoint x location)
+4. Set your initial population size, ___N___, to be = to ___K___ @ t=1
+5. Run your population through the ___Ks___ via Ricker logistic function
+6. Isolate and  model the final timepoint population size ___N___ and covariate ___x___
+
+&lt;font size="6"&gt;
+&lt;b&gt; 7. Look at your coefficients and plot them out
+
+---
+.center[
+&lt;img src="figures/shrink_pos.png"
+alt=""
+width="980px"
+/&gt;
+]
+---
+.center[
+&lt;img src="figures/shrink_neg.png"
+alt=""
+width="980px"
+/&gt;
+]
+---
+.center[
+&lt;img src="figures/general_diagram.png"
+alt=""
+width="710px"
+/&gt;
+]
+---
+.center[
+&lt;img src="figures/pop_size_diagram.png"
+alt=""
+width="700px"
+/&gt;
+]
+
+---
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+## Parameter deviation in space ?
+------------------------
+&lt;br&gt;
+&lt;b&gt;&lt;font size="7"&gt;a 2D interpretation &lt;/font&gt;&lt;/b&gt;
+
+---
+.center[
+&lt;img src="figures/shrinkage_grid.png"
+alt=""
+width="605px"
+/&gt;
+]
+
+---
+
+.center[
+&lt;img src="figures/1_2d_homo_hetero_genization.png"
+alt=""
+width="1100px"
+/&gt;
+]
+
+---
+
+.center[
+&lt;img src="figures/2_2d_homo_hetero_genization.png"
+alt=""
+width="1100px"
+/&gt;
+]
+
+---
+
+## &lt;span style="color:#fc876a;font-size:110%"&gt; Parameter shrinkage in space ?
+---------------------------------
+
+1. Species with increasing populations (K upward over time) 
+
+2. Inference will underestimate relationship
+
+3. Predictions will be more spatially homogeneous
+
+&lt;br&gt;
+Species will look more generalists and widespread while instead they should require targeted measures, 
+
+highly relevant for invasive species control measures
+
+---
+
+.center[
+&lt;img src="figures/3_2d_homo_hetero_genization.png"
+alt=""
+width="1100px"
+/&gt;
+]
+
+---
+
+## &lt;span style="color:#4fb1f2;font-size:110%"&gt; Parameter inflation in space ?
+---------------------------------
+
+1. Species with decreasing populations (K downward over time) 
+
+2. Inference will overestimate relationship
+
+3. Predictions will be more spatially heterogeneous
+
+&lt;br&gt;
+Species will look to be relying on specific conservation hotspots while instead they could require a more spatially broad habitat protection
+
+---
+
+.center[
+&lt;img src="figures/4_2d_homo_hetero_genization.png"
+alt=""
+width="1100px"
+/&gt;
+]
+
+---
+
+## Highlights
+------------------------
+
+- &lt;b&gt; Environmental change inflates or shrinks the inferred relationship between variables &lt;/b&gt;
+
+---
+
+## Highlights
+------------------------
+
+&gt; - Environmental change inflates or shrinks the inferred relationship between variables 
+
+- &lt;b&gt; __Parameter deviation__ depends on response speed (intrinsic growth rate if talking about organisms) &lt;/b&gt;
+
+
+---
+
+## Highlights
+------------------------
+
+&gt; - Environmental change inflates or shrinks the inferred relationship between variables 
+
+&gt; - __Parameter deviation__ depends on response speed ( intrinsic growth rate if talking about organisms)
+
+- &lt;b&gt; __Parameter shrinkage__, magnitude toward 0, happens in increasing populations
+
+- &lt;b&gt; __&lt;b&gt;Parameter inflation__, magnitude toward infinite, happens in decreasing populations
+
+---
+
+## in development  .....
+
+&lt;br&gt;
+ - a case study show of the phenomena across continental scale and its implication for current policies 
+ 
+ - defining an applicable law on how this works and ways to retrieve true parameter by knowing landscape history
+ 
+ - viceversa on the above, if you know equilibrium and deviated parameters how long is your relaxation time, given nothing changes?
+ 
+ - ..................
+
+---
+## Environmental change inflates and shrinks the relationship between variables 
+
+
+&lt;b&gt;&lt;font size="6"&gt; Yacob Haddou, Sofie Spatharis, Rebecca Mancy, Davide Dominoni, Jason Matthiopoulos &lt;/font&gt;&lt;/b&gt;
+
+
+#####[<i class="fa fa-envelope" role="presentation" aria-label="envelope icon"></i> yacob.haddou@glasgow.ac.uk](mailto:yacob.haddou@glasgow.ac.uk)
+
+##### [<i class="fab fa-twitter" role="presentation" aria-label="twitter icon"></i> yacob_haddou](https://twitter.com/yacob_haddou)
+
+##### [<i class="fab fa-github" role="presentation" aria-label="github icon"></i> <i class="fab fa-researchgate" role="presentation" aria-label="researchgate icon"></i> .../valiriel](https://github.com/valiriel)
+
+&lt;font size="5"&gt; Slides coded with __markdown &amp; xaringan__&lt;font/&gt;
+
+---
+
+.center[
+&lt;img src="figures/general_diagram.png"
+alt=""
+width="710px"
+/&gt;
+]
+
+---
+
+.center[
+&lt;img src="figures/3_2d_homo_hetero_genization.png"
+alt=""
+width="1100px"
+/&gt;
+]
+
+---
+
+source("https://git.io/xaringan2pdf"); xaringan_to_pdf(input="parameter_deviation/parameter_deviation.html", output="parameter_deviation/parameter_deviation.pdf")
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "Yacob Haddou _ %current%/%total%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
